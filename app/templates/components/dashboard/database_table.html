@@ -1,0 +1,229 @@
+            <!-- SECTION 3: Registro de Corrida y Snapshot de SQLite -->
+            <div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+                <!-- SQLite Database Top Status Strip -->
+                <div
+                    class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-sm bg-surface-container-high p-space-md rounded-lg">
+                    <div class="flex items-center gap-space-md">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary shadow-inner">
+                            <span class="material-symbols-outlined text-[28px]">data_object</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-space-sm">
+                                <span
+                                    class="font-headline-sm text-headline-sm text-on-surface font-semibold">chat_telemetry_prod.sqlite3</span>
+                                <span
+                                    class="bg-surface-container px-2 py-0.5 rounded font-code-sm text-code-sm text-secondary font-mono">418.2
+                                    MB</span>
+                                <span
+                                    class="bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm px-2 py-0.5 rounded-full font-medium">WAL
+                                    Mode Enabled</span>
+                            </div>
+                            <div class="flex items-center gap-space-md text-outline font-body-sm text-body-sm mt-1">
+                                <span>SQLite v3.45.1 Engine</span>
+                                <span>•</span>
+                                <span>Tablas: <code
+                                        class="text-on-surface-variant font-code-sm text-code-sm">messages</code>,
+                                    <code
+                                        class="text-on-surface-variant font-code-sm text-code-sm">sentiment_scores</code>,
+                                    <code
+                                        class="text-on-surface-variant font-code-sm text-code-sm">lexical_entities</code></span>
+                                <span>•</span>
+                                <span>Integridad B-Tree: <strong class="text-tertiary">OK (0 páginas
+                                        corruptas)</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-space-sm flex-wrap">
+                        <button
+                            class="bg-surface-container hover:bg-surface-container-highest text-on-surface px-space-md py-2 rounded-xl font-label-md text-label-md transition-colors flex items-center gap-1.5 shadow-sm"
+                            type="button">
+                            <span class="material-symbols-outlined text-[18px]">terminal</span>
+                            <span>Ver Logs de Inferencia</span>
+                        </button>
+                        <button
+                            class="bg-secondary-container text-on-secondary hover:brightness-110 px-space-md py-2 rounded-xl font-label-md text-label-md transition-colors flex items-center gap-1.5 shadow-sm"
+                            type="button">
+                            <span class="material-symbols-outlined text-[18px]">file_download</span>
+                            <span>Exportar Snapshot SQLite (.db)</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Stylized Analytical Execution History Table -->
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left font-body-sm text-body-sm border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-surface-container-low text-outline font-label-sm text-label-sm uppercase tracking-wider">
+                                <th class="py-space-sm px-space-md rounded-l-lg">Run ID</th>
+                                <th class="py-space-sm px-space-md">Finalización</th>
+                                <th class="py-space-sm px-space-md">Pipeline de Ingesta</th>
+                                <th class="py-space-sm px-space-md text-right">Msgs Procesados</th>
+                                <th class="py-space-sm px-space-md">Latencia / Rendimiento</th>
+                                <th class="py-space-sm px-space-md">Checksum SHA-256</th>
+                                <th class="py-space-sm px-space-md text-center rounded-r-lg">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-surface-container-high/40">
+                            <!-- Row 1 (Latest Run) -->
+                            <tr class="bg-surface-container hover:bg-surface-container-high/50 transition-colors">
+                                <td class="py-space-sm px-space-md">
+                                    <div
+                                        class="flex items-center gap-1.5 font-code-sm text-code-sm font-semibold text-primary">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+                                        #RUN-8924_EXEC
+                                    </div>
+                                </td>
+                                <td
+                                    class="py-space-sm px-space-md font-body-sm text-body-sm text-on-surface whitespace-nowrap">
+                                    Hace 14 min <span class="text-outline text-[11px]">(13:48:04 UTC)</span>
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <div class="flex flex-col">
+                                        <span class="font-body-sm text-body-sm text-on-surface font-medium">Batch
+                                            ETL + VADER / RoBERTa Fine-tuned</span>
+                                        <span class="font-code-sm text-[11px] text-outline">Vocabulario es-419 +
+                                            normalizador de modismos latam</span>
+                                    </div>
+                                </td>
+                                <td
+                                    class="py-space-sm px-space-md text-right font-code-sm text-code-sm font-bold text-on-surface">
+                                    142,850
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-code-sm text-code-sm text-secondary font-semibold">18.4
+                                            ms/msg</span>
+                                        <span
+                                            class="font-label-sm text-[10px] text-outline bg-surface-container-highest px-1.5 py-0.5 rounded">GPU
+                                            A100x2</span>
+                                    </div>
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <span
+                                        class="font-code-sm text-code-sm text-outline-variant bg-surface-container-lowest px-2 py-1 rounded select-all cursor-pointer hover:text-on-surface"
+                                        title="Click para copiar hash completo">
+                                        e3b0c44298fc1c14...
+                                    </span>
+                                </td>
+                                <td class="py-space-sm px-space-md text-center">
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-tertiary-container/30 text-tertiary font-code-sm text-code-sm px-2.5 py-1 rounded-full font-semibold shadow-[0_0_10px_rgba(78,222,163,0.15)]">
+                                        <span class="material-symbols-outlined text-[14px]">done_all</span>
+                                        EXITOSO
+                                    </span>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="bg-surface-container hover:bg-surface-container-high/50 transition-colors">
+                                <td class="py-space-sm px-space-md">
+                                    <div
+                                        class="flex items-center gap-1.5 font-code-sm text-code-sm text-on-surface-variant">
+                                        <span class="material-symbols-outlined text-[16px] text-outline">history</span>
+                                        #RUN-8923_NIGHTLY
+                                    </div>
+                                </td>
+                                <td
+                                    class="py-space-sm px-space-md font-body-sm text-body-sm text-outline whitespace-nowrap">
+                                    Ayer, 04:00 UTC
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <div class="flex flex-col">
+                                        <span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Full
+                                            Corpus Re-indexing</span>
+                                        <span class="font-code-sm text-[11px] text-outline">Consolidación B-Tree
+                                            de SQLite &amp; Embeddings cache</span>
+                                    </div>
+                                </td>
+                                <td
+                                    class="py-space-sm px-space-md text-right font-code-sm text-code-sm text-on-surface-variant">
+                                    138,210
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-code-sm text-code-sm text-on-surface-variant">21.2
+                                            ms/msg</span>
+                                    </div>
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <span
+                                        class="font-code-sm text-code-sm text-outline-variant bg-surface-container-lowest px-2 py-1 rounded select-all">
+                                        9f834612d1b54a82...
+                                    </span>
+                                </td>
+                                <td class="py-space-sm px-space-md text-center">
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-tertiary-container/30 text-tertiary font-code-sm text-code-sm px-2.5 py-1 rounded-full font-semibold">
+                                        <span class="material-symbols-outlined text-[14px]">done_all</span>
+                                        EXITOSO
+                                    </span>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="bg-surface-container hover:bg-surface-container-high/50 transition-colors">
+                                <td class="py-space-sm px-space-md">
+                                    <div
+                                        class="flex items-center gap-1.5 font-code-sm text-code-sm text-on-surface-variant">
+                                        <span class="material-symbols-outlined text-[16px] text-outline">history</span>
+                                        #RUN-8922_DELTA
+                                    </div>
+                                </td>
+                                <td
+                                    class="py-space-sm px-space-md font-body-sm text-body-sm text-outline whitespace-nowrap">
+                                    Hace 2 días
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="font-body-sm text-body-sm text-on-surface-variant font-medium">Delta
+                                            Streaming Ingestion</span>
+                                        <span class="font-code-sm text-[11px] text-outline">Lote suplementario
+                                            de WhatsApp &amp; Zendesk tickets</span>
+                                    </div>
+                                </td>
+                                <td
+                                    class="py-space-sm px-space-md text-right font-code-sm text-code-sm text-on-surface-variant">
+                                    24,980
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-code-sm text-code-sm text-on-surface-variant">17.9
+                                            ms/msg</span>
+                                    </div>
+                                </td>
+                                <td class="py-space-sm px-space-md">
+                                    <span
+                                        class="font-code-sm text-code-sm text-outline-variant bg-surface-container-lowest px-2 py-1 rounded select-all">
+                                        a125bc4390f09101...
+                                    </span>
+                                </td>
+                                <td class="py-space-sm px-space-md text-center">
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-tertiary-container/30 text-tertiary font-code-sm text-code-sm px-2.5 py-1 rounded-full font-semibold">
+                                        <span class="material-symbols-outlined text-[14px]">done_all</span>
+                                        EXITOSO
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Action Footer with SQLite Engine Diagnostics -->
+                <div
+                    class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-xs text-outline font-label-sm text-label-sm">
+                    <div class="flex items-center gap-space-sm">
+                        <span class="material-symbols-outlined text-[16px] text-secondary">memory</span>
+                        <span>Buffer Pool Cache Hit Ratio: <strong
+                                class="text-tertiary font-code-sm text-code-sm">99.4%</strong></span>
+                        <span>•</span>
+                        <span>Modo Sync: <strong class="text-on-surface font-code-sm text-code-sm">NORMAL +
+                                PRAGMA foreign_keys=ON</strong></span>
+                    </div>
+                    <div
+                        class="flex items-center gap-space-xs text-secondary hover:text-on-surface cursor-pointer transition-colors">
+                        <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                        <span>Abrir SQLite CLI interactivo en Jupyter Lab</span>
+                    </div>
+                </div>
+            </div>

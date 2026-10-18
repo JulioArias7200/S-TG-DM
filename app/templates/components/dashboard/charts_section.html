@@ -1,0 +1,520 @@
+            <!-- SECTION 2: Advanced Interactive Visualizations Grid (ECharts / SVG Analytical Engine) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+                <!-- Visualization 1: Donut Chart - Distribución de Polaridad (5 cols on lg) -->
+                <div
+                    class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-sm">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">pie_chart</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Distribución de
+                                Polaridad</h2>
+                        </div>
+                        <span
+                            class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">118,565
+                            evaluados</span>
+                    </div>
+                    <div class="relative flex items-center justify-center my-space-md">
+                        <!-- Standalone High-Precision SVG Donut Visualization with Interactive Polar Coordinates -->
+                        <svg class="w-64 h-64 transform -rotate-90" viewbox="0 0 280 280">
+                            <!-- Background base circle track -->
+                            <circle class="text-surface-container-highest" cx="140" cy="140" fill="transparent" r="100"
+                                stroke="currentColor" stroke-width="26"></circle>
+                            <!-- Positivo: 45.7% (Circumference = 2 * PI * 100 = 628.32 -> stroke-dasharray = 287.14 628.32) -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#4edea3" stroke-dasharray="287.14 628.32"
+                                stroke-dashoffset="0" stroke-width="26">
+                            </circle>
+                            <!-- Neutro: 32.4% (Length = 203.58) offset = -287.14 -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#4cd7f6" stroke-dasharray="203.58 628.32"
+                                stroke-dashoffset="-287.14" stroke-width="26">
+                            </circle>
+                            <!-- Negativo: 13.5% (Length = 84.82) offset = -490.72 -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#ffb4ab" stroke-dasharray="84.82 628.32"
+                                stroke-dashoffset="-490.72" stroke-width="26">
+                            </circle>
+                            <!-- Indeterminado: 8.4% (Length = 52.78) offset = -575.54 -->
+                            <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
+                                cy="140" fill="transparent" r="100" stroke="#908fa0" stroke-dasharray="52.78 628.32"
+                                stroke-dashoffset="-575.54" stroke-width="26">
+                            </circle>
+                        </svg>
+                        <!-- Donut Hole Content (Metric Callout) -->
+                        <div
+                            class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
+                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Score
+                                Global</span>
+                            <span
+                                class="font-headline-lg text-headline-lg text-tertiary font-bold tracking-tight mt-0.5">+0.68</span>
+                            <span class="font-code-sm text-code-sm text-on-surface-variant font-medium">Sentimiento
+                                Neto</span>
+                        </div>
+                    </div>
+                    <!-- Legend and Breakdown Rows -->
+                    <div
+                        class="grid grid-cols-2 gap-space-xs pt-space-sm bg-surface-container-low p-space-sm rounded-lg">
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-tertiary"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Positivo</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-code-sm text-code-sm font-semibold text-tertiary">45.7%</span>
+                                <span class="font-label-sm text-label-sm text-outline">54,230 msgs</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-secondary"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Neutro</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-code-sm text-code-sm font-semibold text-secondary">32.4%</span>
+                                <span class="font-label-sm text-label-sm text-outline">38,450 msgs</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-error"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Negativo</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="font-code-sm text-code-sm font-semibold text-error">13.5%</span>
+                                <span class="font-label-sm text-label-sm text-outline">16,020 msgs</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-sm bg-outline"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Indeterminado</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span
+                                    class="font-code-sm text-code-sm font-semibold text-on-surface-variant">8.4%</span>
+                                <span class="font-label-sm text-label-sm text-outline">9,865 msgs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Visualization 2: Ranking de Emociones Más Frecuentes (7 cols on lg) -->
+                <div
+                    class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-xs">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Ranking de Emociones
+                                Más Frecuentes</h2>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 bg-surface-container-high px-space-xs py-0.5 rounded text-outline font-label-sm text-label-sm">
+                            <span>Clasificador: GoEmotions-ES</span>
+                        </div>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de intenciones
+                        afectivas extraídas de 118.5k enunciados con evidencia léxica.</p>
+                    <!-- Horizontal Bar List -->
+                    <div class="flex flex-col gap-space-sm">
+                        <!-- Emotion 1 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span
+                                        class="material-symbols-outlined text-[15px] text-tertiary">sentiment_satisfied</span>
+                                    Gratitud / Satisfacción del Cliente
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">38,059
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-tertiary font-bold">32.1%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-tertiary h-full rounded-full transition-all duration-500"
+                                    style="width: 32.1%"></div>
+                            </div>
+                        </div>
+                        <!-- Emotion 2 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span
+                                        class="material-symbols-outlined text-[15px] text-secondary">sentiment_very_satisfied</span>
+                                    Alivio tras Resolución de Ticket
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">21,816
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-secondary font-bold">18.4%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-secondary h-full rounded-full transition-all duration-500"
+                                    style="width: 18.4%"></div>
+                            </div>
+                        </div>
+                        <!-- Emotion 3 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[15px] text-error">warning</span>
+                                    Frustración / Urgencia Operativa
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">16,836
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-error font-bold">14.2%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-error h-full rounded-full transition-all duration-500"
+                                    style="width: 14.2%"></div>
+                            </div>
+                        </div>
+                        <!-- Emotion 4 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[15px] text-primary">receipt_long</span>
+                                    Confusión por Facturación y Cobros
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">13,990
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-primary font-bold">11.8%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-primary h-full rounded-full transition-all duration-500"
+                                    style="width: 11.8%"></div>
+                            </div>
+                        </div>
+                        <!-- Emotion 5 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[15px] text-secondary-fixed">help</span>
+                                    Curiosidad / Interés en Nueva Feature
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">11,263
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-secondary-fixed font-bold">9.5%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-secondary-fixed h-full rounded-full transition-all duration-500"
+                                    style="width: 9.5%"></div>
+                            </div>
+                        </div>
+                        <!-- Emotion 6 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span
+                                        class="material-symbols-outlined text-[15px] text-tertiary-fixed">celebration</span>
+                                    Entusiasmo por Adopción
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">9,722
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-tertiary-fixed font-bold">8.2%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-tertiary-fixed h-full rounded-full transition-all duration-500"
+                                    style="width: 8.2%"></div>
+                            </div>
+                        </div>
+                        <!-- Emotion 7 -->
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center justify-between font-label-sm text-label-sm">
+                                <span class="text-on-surface font-medium flex items-center gap-1.5">
+                                    <span
+                                        class="material-symbols-outlined text-[15px] text-outline">horizontal_rule</span>
+                                    Indiferencia / Informativo Aséptico
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant">6,876
+                                        msgs</span>
+                                    <span class="font-code-sm text-code-sm text-outline font-bold">5.8%</span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+                                <div class="bg-outline h-full rounded-full transition-all duration-500"
+                                    style="width: 5.8%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-code-sm text-code-sm">
+                        <span>* Clasificación multietiqueta normalizada a 100% de representatividad
+                            semántica</span>
+                        <span class="text-secondary hover:underline cursor-pointer">Exportar Vector JSON</span>
+                    </div>
+                </div>
+                <!-- Visualization 3: Línea de Área - Evolución Mensual de Actividad y Polaridad (8 cols on lg) -->
+                <div
+                    class="lg:col-span-8 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-secondary text-[20px]">show_chart</span>
+                            <div class="flex flex-col">
+                                <h2 class="font-headline-sm text-headline-sm text-on-surface">Evolución Mensual
+                                    de Actividad &amp; Polaridad</h2>
+                                <span class="font-label-sm text-label-sm text-outline">Serie histórica Ene - Oct
+                                    2025 (Volumen vs Tendencia de Sentimiento)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg">
+                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-tertiary px-2 py-0.5">
+                                <span class="w-2 h-0.5 bg-tertiary"></span> Positivo
+                            </span>
+                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-error px-2 py-0.5">
+                                <span class="w-2 h-0.5 bg-error"></span> Negativo
+                            </span>
+                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-outline px-2 py-0.5">
+                                <span class="w-2 h-0.5 bg-secondary/60"></span> Volumen
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Analytical Area + Spline Chart SVG with Event Pins -->
+                    <div class="w-full relative py-space-sm">
+                        <svg class="w-full h-56 overflow-visible" viewbox="0 0 740 240">
+                            <defs>
+                                <lineargradient id="volumeArea" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.25"></stop>
+                                    <stop offset="100%" stop-color="#4cd7f6" stop-opacity="0.0"></stop>
+                                </lineargradient>
+                                <lineargradient id="posArea" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#4edea3" stop-opacity="0.2"></stop>
+                                    <stop offset="100%" stop-color="#4edea3" stop-opacity="0.0"></stop>
+                                </lineargradient>
+                            </defs>
+                            <!-- Grid horizontal reference lines -->
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="30" y2="30"></line>
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="80" y2="80"></line>
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="130" y2="130"></line>
+                            <line class="text-surface-container-highest" stroke="currentColor" stroke-dasharray="3 3"
+                                x1="40" x2="720" y1="180" y2="180"></line>
+                            <line class="text-outline-variant" stroke="currentColor" x1="40" x2="720" y1="210" y2="210">
+                            </line>
+                            <!-- Y Axis Labels -->
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="34">20k</text>
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="84">15k</text>
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="134">10k</text>
+                            <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
+                                y="184">5k</text>
+                            <!-- Volume Area Path (10 data points: Ene-Oct) -->
+                            <!-- Points: (60,160) (130,150) (200,120) (270,110) (340,70) (410,95) (480,50) (550,65) (620,40) (690,45) -->
+                            <path
+                                d="M 60,160 C 100,155 160,130 200,120 C 240,110 300,80 340,70 C 380,60 380,105 410,95 C 440,85 450,55 480,50 C 510,45 520,70 550,65 C 580,60 590,42 620,40 C 650,38 670,43 690,45 L 690,210 L 60,210 Z"
+                                fill="url(#volumeArea)"></path>
+                            <!-- Positive Sentiment Path (Green Line) -->
+                            <path
+                                d="M 60,180 C 100,175 160,150 200,140 C 240,130 300,105 340,90 C 380,80 380,125 410,115 C 440,105 450,70 480,65 C 510,60 520,85 550,80 C 580,75 590,52 620,50 C 650,48 670,55 690,58"
+                                fill="none" stroke="#4edea3" stroke-linecap="round" stroke-width="2.5"></path>
+                            <!-- Negative Sentiment Path (Red Line) -->
+                            <path
+                                d="M 60,195 C 100,192 160,185 200,180 C 240,178 300,165 340,150 C 380,140 380,170 410,160 C 440,150 450,175 480,170 C 510,165 520,175 550,170 C 580,168 590,172 620,168 C 650,165 670,170 690,169"
+                                fill="none" stroke="#ffb4ab" stroke-dasharray="4 2" stroke-linecap="round"
+                                stroke-width="2"></path>
+                            <!-- Event Annotation 1: May (X=340) Lanzamiento v3.2 -->
+                            <line opacity="0.6" stroke="#4cd7f6" stroke-dasharray="2 2" stroke-width="1" x1="340"
+                                x2="340" y1="40" y2="210"></line>
+                            <circle cx="340" cy="70" fill="#4cd7f6" r="4"></circle>
+                            <g transform="translate(310, 15)">
+                                <rect class="shadow-sm" fill="#1c1f2a" height="18" rx="4" width="60"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#4cd7f6" text-anchor="middle"
+                                    x="30" y="12">Lanzamiento</text>
+                            </g>
+                            <!-- Event Annotation 2: Jul (X=480) Incidente Latencia y Resolución Inmediata -->
+                            <line opacity="0.6" stroke="#ffb4ab" stroke-dasharray="2 2" stroke-width="1" x1="480"
+                                x2="480" y1="35" y2="210"></line>
+                            <circle cx="480" cy="50" fill="#ffb4ab" r="4"></circle>
+                            <g transform="translate(445, 12)">
+                                <rect fill="#93000a" height="18" opacity="0.9" rx="4" width="70"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#ffdad6" text-anchor="middle"
+                                    x="35" y="12">Fallo SLA P0</text>
+                            </g>
+                            <!-- Event Annotation 3: Sep (X=620) Récord CSAT -->
+                            <circle class="animate-ping" cx="620" cy="40" fill="#4edea3" opacity="0.7" r="4.5">
+                            </circle>
+                            <circle cx="620" cy="40" fill="#4edea3" r="4.5"></circle>
+                            <g transform="translate(585, 8)">
+                                <rect fill="#00885d" height="18" opacity="0.9" rx="4" width="70"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#6ffbbe" text-anchor="middle"
+                                    x="35" y="12">Récord CSAT</text>
+                            </g>
+                            <!-- X Axis Timestamps -->
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="60"
+                                y="228">Ene</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="130"
+                                y="228">Feb</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="200"
+                                y="228">Mar</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="270"
+                                y="228">Abr</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#4cd7f6" text-anchor="middle" x="340"
+                                y="228">May</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="410"
+                                y="228">Jun</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#ffb4ab" text-anchor="middle" x="480"
+                                y="228">Jul</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="550"
+                                y="228">Ago</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#4edea3" text-anchor="middle" x="620"
+                                y="228">Sep</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="690"
+                                y="228">Oct</text>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs bg-surface-container-low p-space-sm rounded-lg">
+                        <div class="flex items-center gap-space-sm">
+                            <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            <span class="font-body-sm text-body-sm text-on-surface">Pico Positivo: <strong
+                                    class="text-tertiary">19,420 msgs en Septiembre</strong> tras release de
+                                onboarding asistido por IA.</span>
+                        </div>
+                        <span class="font-code-sm text-code-sm text-outline">Resolución de Incidentes P0: Ø 42
+                            min</span>
+                    </div>
+                </div>
+                <!-- Visualization 4: Top Emojis Más Utilizados en Chats (4 cols on lg) -->
+                <div
+                    class="lg:col-span-4 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                    <div class="flex items-center justify-between pb-space-xs">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-tertiary text-[20px]">add_reaction</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Emojis en el Chat
+                            </h2>
+                        </div>
+                        <span class="font-label-sm text-label-sm text-outline">8 más detectados</span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Clasificación sintáctica de
+                        emoticonos con asignación de tono contextual.</p>
+                    <!-- Vertical frequency columns grid -->
+                    <div class="grid grid-cols-4 gap-space-xs h-56 items-end pb-space-sm pt-space-xs">
+                        <!-- Emoji 1: 🙏 (12,410) - Positivo -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-tertiary font-bold mb-1 opacity-90 group-hover:opacity-100">12.4k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 90%;">
+                                <div class="w-full bg-tertiary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">🙏</span>
+                            <span
+                                class="bg-tertiary-container/30 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
+                        </div>
+                        <!-- Emoji 2: 👍 (10,850) - Positivo -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-tertiary font-bold mb-1 opacity-90 group-hover:opacity-100">10.8k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 78%;">
+                                <div class="w-full bg-tertiary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">👍</span>
+                            <span
+                                class="bg-tertiary-container/30 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
+                        </div>
+                        <!-- Emoji 3: 😊 (8,920) - Positivo -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-secondary font-bold mb-1 opacity-90 group-hover:opacity-100">8.9k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 64%;">
+                                <div class="w-full bg-secondary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">😊</span>
+                            <span
+                                class="bg-secondary/20 text-secondary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
+                        </div>
+                        <!-- Emoji 4: ⚠️ (5,310) - Alerta -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-error font-bold mb-1 opacity-90 group-hover:opacity-100">5.3k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 44%;">
+                                <div class="w-full bg-error rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">⚠️</span>
+                            <span
+                                class="bg-error-container/40 text-error font-code-sm text-[9px] px-1 rounded mt-0.5 font-semibold">Alerta</span>
+                        </div>
+                        <!-- Emoji 5: ⏳ (4,190) - Urgencia -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-outline font-bold mb-1 opacity-90 group-hover:opacity-100">4.1k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 35%;">
+                                <div class="w-full bg-outline rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">⏳</span>
+                            <span
+                                class="bg-surface-container-high text-outline font-code-sm text-[9px] px-1 rounded mt-0.5">Espera</span>
+                        </div>
+                        <!-- Emoji 6: 😡 (2,840) - Frustración -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-error font-bold mb-1 opacity-90 group-hover:opacity-100">2.8k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 25%;">
+                                <div class="w-full bg-error rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">😡</span>
+                            <span
+                                class="bg-error-container/40 text-error font-code-sm text-[9px] px-1 rounded mt-0.5 font-semibold">Riesgo</span>
+                        </div>
+                        <!-- Emoji 7: ❤️ (2,300) - Positivo -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-tertiary-fixed font-bold mb-1 opacity-90 group-hover:opacity-100">2.3k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 20%;">
+                                <div class="w-full bg-tertiary-fixed-dim rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">❤️</span>
+                            <span
+                                class="bg-tertiary-container/20 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
+                        </div>
+                        <!-- Emoji 8: 🎉 (1,950) - Positivo -->
+                        <div class="flex flex-col items-center h-full justify-end group">
+                            <span
+                                class="font-code-sm text-[10px] text-primary-fixed font-bold mb-1 opacity-90 group-hover:opacity-100">1.9k</span>
+                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
+                                style="height: 16%;">
+                                <div class="w-full bg-primary-container rounded-t-sm transition-all duration-300 group-hover:brightness-110"
+                                    style="height: 100%;"></div>
+                            </div>
+                            <span class="text-lg mt-1.5 select-none">🎉</span>
+                            <span
+                                class="bg-primary/20 text-primary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-label-sm">
+                        <span>Correlación Emoticono / NPS: <strong class="text-on-surface">r =
+                                +0.89</strong></span>
+                        <span class="text-tertiary flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">bolt</span>
+                            Filtro Semántico OK
+                        </span>
+                    </div>
+                </div>
+            </div>
