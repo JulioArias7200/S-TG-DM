@@ -134,3 +134,127 @@ CREATE INDEX IF NOT EXISTS idx_mensajes_docente ON mensajes(docente_mencionado);
 CREATE INDEX IF NOT EXISTS idx_mensajes_materia ON mensajes(materia_mencionada);
 CREATE INDEX IF NOT EXISTS idx_menciones_docente ON menciones_docentes(docente_mencionado);
 CREATE INDEX IF NOT EXISTS idx_reacciones_mensaje ON reacciones_granular(mensaje_id);
+
+-- Restricciones de Clave Foránea (Foreign Keys) para Relaciones e Integridad Referencial
+-- 1. Relaciones de la tabla principal 'mensajes'
+ALTER TABLE mensajes 
+    ADD CONSTRAINT fk_mensajes_docentes 
+    FOREIGN KEY (docente_id) REFERENCES docentes(docente_id) ON DELETE SET NULL;
+
+ALTER TABLE mensajes 
+    ADD CONSTRAINT fk_mensajes_materias 
+    FOREIGN KEY (codigo_materia) REFERENCES materias(codigo_materia) ON DELETE SET NULL;
+
+ALTER TABLE mensajes 
+    ADD CONSTRAINT fk_mensajes_hilo 
+    FOREIGN KEY (respuesta_a_id) REFERENCES mensajes(mensaje_id) ON DELETE SET NULL;
+
+-- 2. Relaciones de 'menciones_docentes'
+ALTER TABLE menciones_docentes 
+    ADD CONSTRAINT fk_menciones_mensajes 
+    FOREIGN KEY (mensaje_id) REFERENCES mensajes(mensaje_id) ON DELETE CASCADE;
+
+ALTER TABLE menciones_docentes 
+    ADD CONSTRAINT fk_menciones_docentes 
+    FOREIGN KEY (docente_id) REFERENCES docentes(docente_id) ON DELETE SET NULL;
+
+ALTER TABLE menciones_docentes 
+    ADD CONSTRAINT fk_menciones_materias 
+    FOREIGN KEY (codigo_materia) REFERENCES materias(codigo_materia) ON DELETE SET NULL;
+
+-- 3. Relaciones de 'oferta_horarios'
+ALTER TABLE oferta_horarios 
+    ADD CONSTRAINT fk_oferta_materias 
+    FOREIGN KEY (codigo_materia) REFERENCES materias(codigo_materia) ON DELETE CASCADE;
+
+ALTER TABLE oferta_horarios 
+    ADD CONSTRAINT fk_oferta_docentes 
+    FOREIGN KEY (docente_id) REFERENCES docentes(docente_id) ON DELETE SET NULL;
+
+-- 4. Relaciones de 'reacciones_granular'
+ALTER TABLE reacciones_granular 
+    ADD CONSTRAINT fk_reacciones_mensajes 
+    FOREIGN KEY (mensaje_id) REFERENCES mensajes(mensaje_id) ON DELETE CASCADE;
+
+-- 5. Tabla de ocurrencias de Modismos por Mensaje
+CREATE TABLE IF NOT EXISTS modismos_mensajes (
+    id SERIAL PRIMARY KEY,
+    mensaje_id BIGINT NOT NULL,
+    modismo VARCHAR(100) NOT NULL,
+    conteo INTEGER DEFAULT 1,
+    CONSTRAINT fk_modismos_mensajes FOREIGN KEY (mensaje_id) REFERENCES mensajes(mensaje_id) ON DELETE CASCADE
+);
+
+-- 6. Tabla de GIFs y Animaciones
+CREATE TABLE IF NOT EXISTS gifs_animaciones (
+    id SERIAL PRIMARY KEY,
+    mensaje_id BIGINT NOT NULL,
+    archivo_ruta VARCHAR(500) NOT NULL,
+    ancho INTEGER,
+    alto INTEGER,
+    duracion_segundos NUMERIC(6, 2),
+    mime_type VARCHAR(100),
+    thumbnail_ruta VARCHAR(500),
+    CONSTRAINT fk_gifs_mensajes FOREIGN KEY (mensaje_id) REFERENCES mensajes(mensaje_id) ON DELETE CASCADE
+);
+
+-- 7. Tabla de Cache OCR de Imágenes
+CREATE TABLE IF NOT EXISTS ocr_cache (
+    clave_imagen TEXT PRIMARY KEY,
+    texto_extraido TEXT,
+    confianza NUMERIC(5, 4),
+    palabras_clave TEXT,
+    fecha_procesamiento TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 8. Índice Full-Text Search (FTS) en Español para Mensajes
+CREATE INDEX IF NOT EXISTS idx_mensajes_fts_es 
+ON mensajes USING gin(to_tsvector('spanish', coalesce(texto_limpio, '')));
+
+-- ====================================================================
+-- VISTAS ANALÍTICAS (DYNAMIC VIEWS)
+-- ====================================================================
+
+-- Vista 1: Ranking Analítico de Docentes
+CREATE OR REPLACE VIEW vista_ranking_docentes AS
+SELECT 
+    d.docente_id,
+    d.nombre_normalizado,
+    d.departamento,
+    COUNT(m.id) AS total_menciones,
+    ROUND(AVG(m.sentimiento_score)::numeric, 4) AS score_sentimiento_promedio,
+    ROUND(SUM(CASE WHEN m.sentimiento_label = 'POS' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(m.id), 0), 2) AS pct_positivo,
+    ROUND(SUM(CASE WHEN m.sentimiento_label = 'NEG' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(m.id), 0), 2) AS pct_negativo,
+    ROUND(SUM(CASE WHEN m.sentimiento_label = 'NEU' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(m.id), 0), 2) AS pct_neutral
+FROM docentes d
+JOIN menciones_docentes m ON d.docente_id = m.docente_id
+GROUP BY d.docente_id, d.nombre_normalizado, d.departamento;
+
+-- Vista 2: Resumen Analítico de Materias
+CREATE OR REPLACE VIEW vista_resumen_materias AS
+SELECT 
+    mat.codigo_materia,
+    mat.nombre_materia,
+    mat.departamento,
+    COUNT(m.id) AS total_menciones,
+    ROUND(AVG(m.sentimiento_score)::numeric, 4) AS score_sentimiento_promedio,
+    COUNT(DISTINCT m.docente_id) AS docentes_asociados
+FROM materias mat
+JOIN menciones_docentes m ON mat.codigo_materia = m.codigo_materia
+GROUP BY mat.codigo_materia, mat.nombre_materia, mat.departamento;
+
+-- Vista 3: Tendencia Temporal Mensual de Sentimiento
+CREATE OR REPLACE VIEW vista_tendencia_temporal_sentimiento AS
+SELECT 
+    TO_CHAR(fecha, 'YYYY-MM') AS cohorte_mes,
+    COUNT(*) AS total_mensajes,
+    ROUND(AVG(compound)::numeric, 4) AS compound_promedio,
+    ROUND(SUM(CASE WHEN label_sentimiento = 'POS' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(*), 0), 2) AS pct_positivo,
+    ROUND(SUM(CASE WHEN label_sentimiento = 'NEG' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(*), 0), 2) AS pct_negativo,
+    ROUND(SUM(CASE WHEN label_sentimiento = 'NEU' THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(*), 0), 2) AS pct_neutral
+FROM mensajes
+WHERE fecha IS NOT NULL
+GROUP BY TO_CHAR(fecha, 'YYYY-MM')
+ORDER BY cohorte_mes;
+
+

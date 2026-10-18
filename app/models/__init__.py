@@ -11,7 +11,10 @@ from app.models.schema import (
     ReaccionGranular,
     Modismo,
     DiccionarioJerga,
-    EventoServicio
+    EventoServicio,
+    ModismoMensaje,
+    GifAnimacion,
+    OcrCache
 )
 
 __all__ = [
@@ -23,5 +26,8 @@ __all__ = [
     "ReaccionGranular",
     "Modismo",
     "DiccionarioJerga",
-    "EventoServicio"
+    "EventoServicio",
+    "ModismoMensaje",
+    "GifAnimacion",
+    "OcrCache"
 ]

@@ -40,10 +40,11 @@ class OfertaHorario(db.Model):
     __tablename__ = "oferta_horarios"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    codigo_materia = db.Column(db.String(50), index=True)
+    codigo_materia = db.Column(db.String(50), db.ForeignKey("materias.codigo_materia", ondelete="CASCADE"), index=True)
     nombre_materia = db.Column(db.String(255))
     paralelo = db.Column(db.String(20))
     docente = db.Column(db.String(255), index=True)
+    docente_id = db.Column(db.String(100), db.ForeignKey("docentes.docente_id", ondelete="SET NULL"), nullable=True)
     horarios = db.Column(db.Text)
 
 class Mensaje(db.Model):
@@ -58,7 +59,7 @@ class Mensaje(db.Model):
     usuario_id = db.Column(db.String(100), index=True)
     usuario_nombre = db.Column(db.Text)
     es_respuesta = db.Column(db.Boolean, default=False)
-    respuesta_a_id = db.Column(db.BigInteger, nullable=True)
+    respuesta_a_id = db.Column(db.BigInteger, db.ForeignKey("mensajes.mensaje_id", ondelete="SET NULL"), nullable=True)
     padre_existe = db.Column(db.Boolean, default=False)
     texto_mensaje_padre = db.Column(db.Text)
     texto_original = db.Column(db.Text)
@@ -82,7 +83,9 @@ class Mensaje(db.Model):
     reaccion_principal = db.Column(db.String(50))
     reacciones_resumen = db.Column(db.Text)
     docente_mencionado = db.Column(db.Text, index=True)
+    docente_id = db.Column(db.String(100), db.ForeignKey("docentes.docente_id", ondelete="SET NULL"), nullable=True)
     materia_mencionada = db.Column(db.Text, index=True)
+    codigo_materia = db.Column(db.String(50), db.ForeignKey("materias.codigo_materia", ondelete="SET NULL"), nullable=True)
     entidad_heredada_hilo = db.Column(db.Boolean, default=False)
     contenido_multimodal_unificado = db.Column(db.Text)
 
@@ -90,9 +93,11 @@ class MencionDocente(db.Model):
     __tablename__ = "menciones_docentes"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    mensaje_id = db.Column(db.BigInteger, index=True)
+    mensaje_id = db.Column(db.BigInteger, db.ForeignKey("mensajes.mensaje_id", ondelete="CASCADE"), index=True)
     docente_mencionado = db.Column(db.Text, index=True)
+    docente_id = db.Column(db.String(100), db.ForeignKey("docentes.docente_id", ondelete="SET NULL"), nullable=True)
     materia_mencionada = db.Column(db.Text, index=True)
+    codigo_materia = db.Column(db.String(50), db.ForeignKey("materias.codigo_materia", ondelete="SET NULL"), nullable=True)
     fecha = db.Column(db.DateTime, index=True)
     usuario_nombre = db.Column(db.Text)
     texto_limpio = db.Column(db.Text)
@@ -104,7 +109,7 @@ class ReaccionGranular(db.Model):
     __tablename__ = "reacciones_granular"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    mensaje_id = db.Column(db.BigInteger, index=True)
+    mensaje_id = db.Column(db.BigInteger, db.ForeignKey("mensajes.mensaje_id", ondelete="CASCADE"), index=True)
     fecha_mensaje = db.Column(db.DateTime)
     emoji = db.Column(db.String(50))
     conteo = db.Column(db.Integer, default=1)
@@ -144,3 +149,44 @@ class EventoServicio(db.Model):
     actor = db.Column(db.String(255))
     actor_id = db.Column(db.String(100))
     accion = db.Column(db.Text)
+
+class ModismoMensaje(db.Model):
+    __tablename__ = "modismos_mensajes"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    mensaje_id = db.Column(db.BigInteger, db.ForeignKey("mensajes.mensaje_id", ondelete="CASCADE"), index=True)
+    fecha = db.Column(db.DateTime, index=True)
+    usuario_nombre = db.Column(db.Text)
+    modismo_nombre = db.Column(db.String(100), index=True)
+    termino_exacto = db.Column(db.String(100))
+    categoria = db.Column(db.String(100), index=True)
+    polaridad_asignada = db.Column(db.Float)
+    es_sarcasmo_potencial = db.Column(db.Boolean, default=False)
+    docente_mencionado = db.Column(db.Text)
+    materia_mencionada = db.Column(db.Text)
+    contexto_kwic = db.Column(db.Text)
+    reacciones = db.Column(db.Text)
+    texto_completo = db.Column(db.Text)
+
+class GifAnimacion(db.Model):
+    __tablename__ = "gifs_animaciones"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    mensaje_id = db.Column(db.BigInteger, db.ForeignKey("mensajes.mensaje_id", ondelete="CASCADE"), index=True)
+    fecha = db.Column(db.DateTime)
+    usuario_nombre = db.Column(db.Text)
+    gif_nombre = db.Column(db.Text)
+    archivo_adjunto = db.Column(db.Text)
+    thumbnail_adjunto = db.Column(db.Text)
+    texto_limpio = db.Column(db.Text)
+    contenido_multimodal_unificado = db.Column(db.Text)
+
+class OcrCache(db.Model):
+    __tablename__ = "ocr_cache"
+    
+    clave_imagen = db.Column(db.Text, primary_key=True)
+    texto_ocr = db.Column(db.Text)
+    longitud_caracteres = db.Column(db.Integer, default=0)
+    tiene_texto = db.Column(db.Boolean, default=False)
+    fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
+
