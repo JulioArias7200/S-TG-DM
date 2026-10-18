@@ -18,6 +18,10 @@ def create_app(config_name=None):
     config_obj = config_by_name.get(config_name, config_by_name["default"])
     app.config.from_object(config_obj)
     
+    # Inicializar Base de Datos
+    from app.extensions import db
+    db.init_app(app)
+    
     # Registrar Blueprints
     from app.routes.web import web_bp
     from app.routes.api_v1 import api_v1_bp

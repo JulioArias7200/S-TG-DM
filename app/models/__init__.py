@@ -2,3 +2,26 @@
 """
 Módulo de modelos SQLAlchemy para Neon PostgreSQL.
 """
+from app.models.schema import (
+    Docente,
+    Materia,
+    OfertaHorario,
+    Mensaje,
+    MencionDocente,
+    ReaccionGranular,
+    Modismo,
+    DiccionarioJerga,
+    EventoServicio
+)
+
+__all__ = [
+    "Docente",
+    "Materia",
+    "OfertaHorario",
+    "Mensaje",
+    "MencionDocente",
+    "ReaccionGranular",
+    "Modismo",
+    "DiccionarioJerga",
+    "EventoServicio"
+]

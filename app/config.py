@@ -10,7 +10,9 @@ class Config:
     # Normalización de URL para Neon PostgreSQL (Render provee postgres:// que SQLAlchemy prefiere como postgresql://)
     raw_db_url = os.getenv("DATABASE_URL", "sqlite:///sentix_local.db")
     if raw_db_url.startswith("postgres://"):
-        raw_db_url = raw_db_url.replace("postgres://", "postgresql://", 1)
+        raw_db_url = raw_db_url.replace("postgres://", "postgresql+psycopg2://", 1)
+    elif raw_db_url.startswith("postgresql://") and not raw_db_url.startswith("postgresql+"):
+        raw_db_url = raw_db_url.replace("postgresql://", "postgresql+psycopg2://", 1)
     
     SQLALCHEMY_DATABASE_URI = raw_db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
