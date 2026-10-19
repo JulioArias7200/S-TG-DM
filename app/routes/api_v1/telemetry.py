@@ -18,18 +18,22 @@ def health_check():
 def get_stats():
     """Métricas en JSON en tiempo real obtenidas desde Neon PostgreSQL."""
     try:
-        from database import get_kpi_summary
-        kpis = get_kpi_summary()
+        from database import get_dashboard_kpis
+        kpis = get_dashboard_kpis()
         return jsonify({
             "status": "success",
             "engine": "Neon PostgreSQL Serverless (Live)",
             "total_messages": kpis["total_mensajes"],
             "unique_senders": kpis["usuarios_unicos"],
+            "avg_msgs_sender": kpis["promedio_msgs_usuario"],
+            "total_docentes": kpis["total_docentes"],
+            "total_materias": kpis["total_materias"],
             "total_evaluaciones_docentes": kpis["total_menciones"],
             "total_reacciones_sociales": kpis["total_reacciones"],
-            "catalogo_modismos_activos": kpis["total_modismos"],
-            "confidence_threshold": 0.88,
-            "lexical_coverage": "96.4%"
+            "total_ocr_images": kpis["total_ocr"],
+            "total_gifs": kpis["total_gifs"],
+            "total_modismos": kpis["total_modismos"],
+            "total_multimodal_artifacts": kpis["total_multimodal"]
         }), 200
     except Exception as e:
         return jsonify({

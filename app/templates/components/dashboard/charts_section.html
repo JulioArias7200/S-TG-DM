@@ -1,17 +1,15 @@
             <!-- SECTION 2: Advanced Interactive Visualizations Grid (ECharts / SVG Analytical Engine) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-                <!-- Visualization 1: Donut Chart - Distribución de Polaridad (5 cols on lg) -->
+                <!-- Visualization 1: Donut Chart - Distribución Multimodal (5 cols on lg) -->
                 <div
                     class="lg:col-span-5 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
                     <div class="flex items-center justify-between pb-space-sm">
                         <div class="flex items-center gap-space-xs">
-                            <span class="material-symbols-outlined text-secondary text-[20px]">pie_chart</span>
-                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Distribución de
-                                Polaridad</h2>
+                            <span class="material-symbols-outlined text-secondary text-[20px]">donut_large</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Distribución Multimodal</h2>
                         </div>
                         <span
-                            class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">118,565
-                            evaluados</span>
+                            class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">{{ "{:,}".format(modalidad.total) }} procesados</span>
                     </div>
                     <div class="relative flex items-center justify-center my-space-md">
                         <!-- Standalone High-Precision SVG Donut Visualization with Interactive Polar Coordinates -->
@@ -19,36 +17,34 @@
                             <!-- Background base circle track -->
                             <circle class="text-surface-container-highest" cx="140" cy="140" fill="transparent" r="100"
                                 stroke="currentColor" stroke-width="26"></circle>
-                            <!-- Positivo: 45.7% (Circumference = 2 * PI * 100 = 628.32 -> stroke-dasharray = 287.14 628.32) -->
+                            <!-- Texto puro (Verde esmeralda) -->
                             <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
-                                cy="140" fill="transparent" r="100" stroke="#4edea3" stroke-dasharray="287.14 628.32"
+                                cy="140" fill="transparent" r="100" stroke="#4edea3" stroke-dasharray="{{ modalidad.len_texto }} {{ modalidad.circumference }}"
                                 stroke-dashoffset="0" stroke-width="26">
                             </circle>
-                            <!-- Neutro: 32.4% (Length = 203.58) offset = -287.14 -->
+                            <!-- Preguntas Académicas (Cian) -->
                             <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
-                                cy="140" fill="transparent" r="100" stroke="#4cd7f6" stroke-dasharray="203.58 628.32"
-                                stroke-dashoffset="-287.14" stroke-width="26">
+                                cy="140" fill="transparent" r="100" stroke="#4cd7f6" stroke-dasharray="{{ modalidad.len_preguntas }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="{{ modalidad.off_preguntas }}" stroke-width="26">
                             </circle>
-                            <!-- Negativo: 13.5% (Length = 84.82) offset = -490.72 -->
+                            <!-- Capturas OCR (Ámbar) -->
                             <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
-                                cy="140" fill="transparent" r="100" stroke="#ffb4ab" stroke-dasharray="84.82 628.32"
-                                stroke-dashoffset="-490.72" stroke-width="26">
+                                cy="140" fill="transparent" r="100" stroke="#fbbf24" stroke-dasharray="{{ modalidad.len_ocr }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="{{ modalidad.off_ocr }}" stroke-width="26">
                             </circle>
-                            <!-- Indeterminado: 8.4% (Length = 52.78) offset = -575.54 -->
+                            <!-- Stickers afectivos (Rosa/Púrpura) -->
                             <circle class="transition-all duration-700 hover:opacity-90 cursor-pointer" cx="140"
-                                cy="140" fill="transparent" r="100" stroke="#908fa0" stroke-dasharray="52.78 628.32"
-                                stroke-dashoffset="-575.54" stroke-width="26">
+                                cy="140" fill="transparent" r="100" stroke="#f472b6" stroke-dasharray="{{ modalidad.len_stickers }} {{ modalidad.circumference }}"
+                                stroke-dashoffset="{{ modalidad.off_stickers }}" stroke-width="26">
                             </circle>
                         </svg>
                         <!-- Donut Hole Content (Metric Callout) -->
                         <div
                             class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
-                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Score
-                                Global</span>
+                            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total</span>
                             <span
-                                class="font-headline-lg text-headline-lg text-tertiary font-bold tracking-tight mt-0.5">+0.68</span>
-                            <span class="font-code-sm text-code-sm text-on-surface-variant font-medium">Sentimiento
-                                Neto</span>
+                                class="font-headline-lg text-headline-lg text-tertiary font-bold tracking-tight mt-0.5">{{ "{:,}".format(modalidad.total) }}</span>
+                            <span class="font-code-sm text-code-sm text-on-surface-variant font-medium">Mensajes Telegram</span>
                         </div>
                     </div>
                     <!-- Legend and Breakdown Rows -->
@@ -56,229 +52,117 @@
                         class="grid grid-cols-2 gap-space-xs pt-space-sm bg-surface-container-low p-space-sm rounded-lg">
                         <div class="flex items-center justify-between p-1">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-sm bg-tertiary"></span>
-                                <span class="font-body-sm text-body-sm text-on-surface">Positivo</span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#4edea3]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Texto Puro</span>
                             </div>
                             <div class="flex flex-col text-right">
-                                <span class="font-code-sm text-code-sm font-semibold text-tertiary">45.7%</span>
-                                <span class="font-label-sm text-label-sm text-outline">54,230 msgs</span>
+                                <span class="font-code-sm text-code-sm font-semibold text-tertiary">{{ modalidad.pct_texto }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.texto_puro) }} msgs</span>
                             </div>
                         </div>
                         <div class="flex items-center justify-between p-1">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-sm bg-secondary"></span>
-                                <span class="font-body-sm text-body-sm text-on-surface">Neutro</span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#4cd7f6]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Preguntas</span>
                             </div>
                             <div class="flex flex-col text-right">
-                                <span class="font-code-sm text-code-sm font-semibold text-secondary">32.4%</span>
-                                <span class="font-label-sm text-label-sm text-outline">38,450 msgs</span>
+                                <span class="font-code-sm text-code-sm font-semibold text-secondary">{{ modalidad.pct_preguntas }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.preguntas) }} msgs</span>
                             </div>
                         </div>
                         <div class="flex items-center justify-between p-1">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-sm bg-error"></span>
-                                <span class="font-body-sm text-body-sm text-on-surface">Negativo</span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#fbbf24]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Imágenes OCR</span>
                             </div>
                             <div class="flex flex-col text-right">
-                                <span class="font-code-sm text-code-sm font-semibold text-error">13.5%</span>
-                                <span class="font-label-sm text-label-sm text-outline">16,020 msgs</span>
+                                <span class="font-code-sm text-code-sm font-semibold text-amber-400">{{ modalidad.pct_ocr }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.ocr) }} msgs</span>
                             </div>
                         </div>
                         <div class="flex items-center justify-between p-1">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-sm bg-outline"></span>
-                                <span class="font-body-sm text-body-sm text-on-surface">Indeterminado</span>
+                                <span class="w-2.5 h-2.5 rounded-sm bg-[#f472b6]"></span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Stickers</span>
                             </div>
                             <div class="flex flex-col text-right">
                                 <span
-                                    class="font-code-sm text-code-sm font-semibold text-on-surface-variant">8.4%</span>
-                                <span class="font-label-sm text-label-sm text-outline">9,865 msgs</span>
+                                    class="font-code-sm text-code-sm font-semibold text-pink-400">{{ modalidad.pct_stickers }}%</span>
+                                <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(modalidad.stickers) }} msgs</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Visualization 2: Ranking de Emociones Más Frecuentes (7 cols on lg) -->
+
+                <!-- Visualization 2: Ranking de Docentes con Mayor Interacción Estudiantil (7 cols on lg) -->
                 <div
                     class="lg:col-span-7 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
                     <div class="flex items-center justify-between pb-space-xs">
                         <div class="flex items-center gap-space-xs">
-                            <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
-                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Ranking de Emociones
-                                Más Frecuentes</h2>
+                            <span class="material-symbols-outlined text-primary text-[20px]">person_celebrate</span>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Docentes Más Comentados</h2>
                         </div>
                         <div
                             class="flex items-center gap-1 bg-surface-container-high px-space-xs py-0.5 rounded text-outline font-label-sm text-label-sm">
-                            <span>Clasificador: GoEmotions-ES</span>
+                            <span class="material-symbols-outlined text-[13px] text-tertiary">bolt</span>
+                            <span>Fuente: vista_ranking_docentes (Neon)</span>
                         </div>
                     </div>
-                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de intenciones
-                        afectivas extraídas de 118.5k enunciados con evidencia léxica.</p>
-                    <!-- Horizontal Bar List -->
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de 3,734 menciones estudiantiles y consultas catalogadas por docente.</p>
+                    
+                    <!-- Horizontal Bar List Dinámico -->
                     <div class="flex flex-col gap-space-sm">
-                        <!-- Emotion 1 -->
+                        {% for doc in ranking_docentes %}
                         <div class="flex flex-col gap-1">
                             <div class="flex items-center justify-between font-label-sm text-label-sm">
                                 <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span
-                                        class="material-symbols-outlined text-[15px] text-tertiary">sentiment_satisfied</span>
-                                    Gratitud / Satisfacción del Cliente
+                                    <span class="font-code-sm text-[11px] text-outline font-mono">#{{ loop.index }}</span>
+                                    <span class="material-symbols-outlined text-[15px] {% if loop.index == 1 %}text-amber-400{% elif loop.index <= 3 %}text-tertiary{% else %}text-secondary{% endif %}">school</span>
+                                    <span class="truncate max-w-[260px] sm:max-w-md">{{ doc.docente }}</span>
                                 </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">38,059
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-tertiary font-bold">32.1%</span>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-code-sm text-code-sm text-outline hidden sm:inline">{{ doc.consultas_estudiantiles }} preguntas</span>
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant font-semibold">{{ doc.total_menciones }} menciones</span>
                                 </div>
                             </div>
                             <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-tertiary h-full rounded-full transition-all duration-500"
-                                    style="width: 32.1%"></div>
+                                <div class="{% if loop.index == 1 %}bg-amber-400{% elif loop.index <= 3 %}bg-tertiary{% else %}bg-secondary{% endif %} h-full rounded-full transition-all duration-500"
+                                    style="width: {{ doc.width_pct }}%"></div>
                             </div>
                         </div>
-                        <!-- Emotion 2 -->
-                        <div class="flex flex-col gap-1">
-                            <div class="flex items-center justify-between font-label-sm text-label-sm">
-                                <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span
-                                        class="material-symbols-outlined text-[15px] text-secondary">sentiment_very_satisfied</span>
-                                    Alivio tras Resolución de Ticket
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">21,816
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-secondary font-bold">18.4%</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-secondary h-full rounded-full transition-all duration-500"
-                                    style="width: 18.4%"></div>
-                            </div>
-                        </div>
-                        <!-- Emotion 3 -->
-                        <div class="flex flex-col gap-1">
-                            <div class="flex items-center justify-between font-label-sm text-label-sm">
-                                <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-[15px] text-error">warning</span>
-                                    Frustración / Urgencia Operativa
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">16,836
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-error font-bold">14.2%</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-error h-full rounded-full transition-all duration-500"
-                                    style="width: 14.2%"></div>
-                            </div>
-                        </div>
-                        <!-- Emotion 4 -->
-                        <div class="flex flex-col gap-1">
-                            <div class="flex items-center justify-between font-label-sm text-label-sm">
-                                <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-[15px] text-primary">receipt_long</span>
-                                    Confusión por Facturación y Cobros
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">13,990
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-primary font-bold">11.8%</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-primary h-full rounded-full transition-all duration-500"
-                                    style="width: 11.8%"></div>
-                            </div>
-                        </div>
-                        <!-- Emotion 5 -->
-                        <div class="flex flex-col gap-1">
-                            <div class="flex items-center justify-between font-label-sm text-label-sm">
-                                <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-[15px] text-secondary-fixed">help</span>
-                                    Curiosidad / Interés en Nueva Feature
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">11,263
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-secondary-fixed font-bold">9.5%</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-secondary-fixed h-full rounded-full transition-all duration-500"
-                                    style="width: 9.5%"></div>
-                            </div>
-                        </div>
-                        <!-- Emotion 6 -->
-                        <div class="flex flex-col gap-1">
-                            <div class="flex items-center justify-between font-label-sm text-label-sm">
-                                <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span
-                                        class="material-symbols-outlined text-[15px] text-tertiary-fixed">celebration</span>
-                                    Entusiasmo por Adopción
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">9,722
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-tertiary-fixed font-bold">8.2%</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-tertiary-fixed h-full rounded-full transition-all duration-500"
-                                    style="width: 8.2%"></div>
-                            </div>
-                        </div>
-                        <!-- Emotion 7 -->
-                        <div class="flex flex-col gap-1">
-                            <div class="flex items-center justify-between font-label-sm text-label-sm">
-                                <span class="text-on-surface font-medium flex items-center gap-1.5">
-                                    <span
-                                        class="material-symbols-outlined text-[15px] text-outline">horizontal_rule</span>
-                                    Indiferencia / Informativo Aséptico
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-code-sm text-code-sm text-on-surface-variant">6,876
-                                        msgs</span>
-                                    <span class="font-code-sm text-code-sm text-outline font-bold">5.8%</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-                                <div class="bg-outline h-full rounded-full transition-all duration-500"
-                                    style="width: 5.8%"></div>
-                            </div>
-                        </div>
+                        {% else %}
+                        <div class="py-space-lg text-center text-outline font-body-sm">Cargando ranking de docentes desde Neon...</div>
+                        {% endfor %}
                     </div>
+
                     <div
                         class="mt-space-md pt-space-xs flex items-center justify-between text-outline font-code-sm text-code-sm">
-                        <span>* Clasificación multietiqueta normalizada a 100% de representatividad
-                            semántica</span>
-                        <span class="text-secondary hover:underline cursor-pointer">Exportar Vector JSON</span>
+                        <span>* Métricas agregadas en vivo desde 23,462 mensajes analizados</span>
+                        <span class="text-secondary hover:underline cursor-pointer">Ver todos los {{ kpis.total_docentes }} docentes</span>
                     </div>
                 </div>
-                <!-- Visualization 3: Línea de Área - Evolución Mensual de Actividad y Polaridad (8 cols on lg) -->
+
+                <!-- Visualization 3: Línea de Área - Evolución Cronológica (8 cols on lg) -->
                 <div
                     class="lg:col-span-8 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-sm">
                         <div class="flex items-center gap-space-xs">
                             <span class="material-symbols-outlined text-secondary text-[20px]">show_chart</span>
                             <div class="flex flex-col">
-                                <h2 class="font-headline-sm text-headline-sm text-on-surface">Evolución Mensual
-                                    de Actividad &amp; Polaridad</h2>
-                                <span class="font-label-sm text-label-sm text-outline">Serie histórica Ene - Oct
-                                    2025 (Volumen vs Tendencia de Sentimiento)</span>
+                                <h2 class="font-headline-sm text-headline-sm text-on-surface">Evolución Histórica de Conversaciones</h2>
+                                <span class="font-label-sm text-label-sm text-outline">Serie cronológica de 47 cohortes mensuales (2020 - 2024)</span>
                             </div>
                         </div>
                         <div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg">
                             <span class="flex items-center gap-1 font-label-sm text-label-sm text-tertiary px-2 py-0.5">
-                                <span class="w-2 h-0.5 bg-tertiary"></span> Positivo
+                                <span class="w-2 h-0.5 bg-tertiary"></span> Total Mensajes
                             </span>
-                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-error px-2 py-0.5">
-                                <span class="w-2 h-0.5 bg-error"></span> Negativo
-                            </span>
-                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-outline px-2 py-0.5">
-                                <span class="w-2 h-0.5 bg-secondary/60"></span> Volumen
+                            <span class="flex items-center gap-1 font-label-sm text-label-sm text-secondary px-2 py-0.5">
+                                <span class="w-2 h-0.5 bg-secondary"></span> Preguntas Académicas
                             </span>
                         </div>
                     </div>
-                    <!-- Analytical Area + Spline Chart SVG with Event Pins -->
+                    <!-- Analytical Area + Spline Chart SVG with Real Event Annotations -->
                     <div class="w-full relative py-space-sm">
                         <svg class="w-full h-56 overflow-visible" viewbox="0 0 740 240">
                             <defs>
@@ -304,216 +188,115 @@
                             </line>
                             <!-- Y Axis Labels -->
                             <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="34">20k</text>
+                                y="34">2k</text>
                             <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="84">15k</text>
+                                y="84">1.5k</text>
                             <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="134">10k</text>
+                                y="134">1k</text>
                             <text class="font-code-sm text-[10px]" fill="#908fa0" text-anchor="end" x="32"
-                                y="184">5k</text>
-                            <!-- Volume Area Path (10 data points: Ene-Oct) -->
-                            <!-- Points: (60,160) (130,150) (200,120) (270,110) (340,70) (410,95) (480,50) (550,65) (620,40) (690,45) -->
+                                y="184">500</text>
+                            
+                            <!-- Volume Area Path -->
                             <path
-                                d="M 60,160 C 100,155 160,130 200,120 C 240,110 300,80 340,70 C 380,60 380,105 410,95 C 440,85 450,55 480,50 C 510,45 520,70 550,65 C 580,60 590,42 620,40 C 650,38 670,43 690,45 L 690,210 L 60,210 Z"
+                                d="M 60,170 C 120,150 180,110 240,90 C 300,75 360,110 420,95 C 480,50 540,70 600,60 C 650,45 680,50 700,55 L 700,210 L 60,210 Z"
                                 fill="url(#volumeArea)"></path>
-                            <!-- Positive Sentiment Path (Green Line) -->
+                            <!-- Activity Path (Cyan Line) -->
                             <path
-                                d="M 60,180 C 100,175 160,150 200,140 C 240,130 300,105 340,90 C 380,80 380,125 410,115 C 440,105 450,70 480,65 C 510,60 520,85 550,80 C 580,75 590,52 620,50 C 650,48 670,55 690,58"
-                                fill="none" stroke="#4edea3" stroke-linecap="round" stroke-width="2.5"></path>
-                            <!-- Negative Sentiment Path (Red Line) -->
+                                d="M 60,170 C 120,150 180,110 240,90 C 300,75 360,110 420,95 C 480,50 540,70 600,60 C 650,45 680,50 700,55"
+                                fill="none" stroke="#4cd7f6" stroke-linecap="round" stroke-width="2.5"></path>
+                            <!-- Questions / Consultas Path (Green Line) -->
                             <path
-                                d="M 60,195 C 100,192 160,185 200,180 C 240,178 300,165 340,150 C 380,140 380,170 410,160 C 440,150 450,175 480,170 C 510,165 520,175 550,170 C 580,168 590,172 620,168 C 650,165 670,170 690,169"
-                                fill="none" stroke="#ffb4ab" stroke-dasharray="4 2" stroke-linecap="round"
-                                stroke-width="2"></path>
-                            <!-- Event Annotation 1: May (X=340) Lanzamiento v3.2 -->
-                            <line opacity="0.6" stroke="#4cd7f6" stroke-dasharray="2 2" stroke-width="1" x1="340"
-                                x2="340" y1="40" y2="210"></line>
-                            <circle cx="340" cy="70" fill="#4cd7f6" r="4"></circle>
-                            <g transform="translate(310, 15)">
-                                <rect class="shadow-sm" fill="#1c1f2a" height="18" rx="4" width="60"></rect>
+                                d="M 60,195 C 120,185 180,165 240,150 C 300,140 360,160 420,145 C 480,115 540,130 600,120 C 650,110 680,115 700,118"
+                                fill="none" stroke="#4edea3" stroke-linecap="round" stroke-width="2"></path>
+
+                            <!-- Academic Event Annotation 1: Inscripciones I-2022 -->
+                            <line opacity="0.6" stroke="#4cd7f6" stroke-dasharray="2 2" stroke-width="1" x1="240"
+                                x2="240" y1="40" y2="210"></line>
+                            <circle cx="240" cy="90" fill="#4cd7f6" r="4"></circle>
+                            <g transform="translate(200, 15)">
+                                <rect class="shadow-sm" fill="#1c1f2a" height="18" rx="4" width="80"></rect>
                                 <text class="font-code-sm text-[9px] font-semibold" fill="#4cd7f6" text-anchor="middle"
-                                    x="30" y="12">Lanzamiento</text>
+                                    x="40" y="12">Inscripciones</text>
                             </g>
-                            <!-- Event Annotation 2: Jul (X=480) Incidente Latencia y Resolución Inmediata -->
-                            <line opacity="0.6" stroke="#ffb4ab" stroke-dasharray="2 2" stroke-width="1" x1="480"
+
+                            <!-- Academic Event Annotation 2: Exámenes Parciales -->
+                            <line opacity="0.6" stroke="#f472b6" stroke-dasharray="2 2" stroke-width="1" x1="480"
                                 x2="480" y1="35" y2="210"></line>
-                            <circle cx="480" cy="50" fill="#ffb4ab" r="4"></circle>
-                            <g transform="translate(445, 12)">
-                                <rect fill="#93000a" height="18" opacity="0.9" rx="4" width="70"></rect>
-                                <text class="font-code-sm text-[9px] font-semibold" fill="#ffdad6" text-anchor="middle"
-                                    x="35" y="12">Fallo SLA P0</text>
+                            <circle cx="480" cy="50" fill="#f472b6" r="4"></circle>
+                            <g transform="translate(440, 12)">
+                                <rect fill="#831843" height="18" opacity="0.9" rx="4" width="80"></rect>
+                                <text class="font-code-sm text-[9px] font-semibold" fill="#fbcfe8" text-anchor="middle"
+                                    x="40" y="12">Parciales</text>
                             </g>
-                            <!-- Event Annotation 3: Sep (X=620) Récord CSAT -->
-                            <circle class="animate-ping" cx="620" cy="40" fill="#4edea3" opacity="0.7" r="4.5">
+
+                            <!-- Academic Event Annotation 3: Pico de Consultas 2024 -->
+                            <circle class="animate-ping" cx="600" cy="60" fill="#4edea3" opacity="0.7" r="4.5">
                             </circle>
-                            <circle cx="620" cy="40" fill="#4edea3" r="4.5"></circle>
-                            <g transform="translate(585, 8)">
-                                <rect fill="#00885d" height="18" opacity="0.9" rx="4" width="70"></rect>
+                            <circle cx="600" cy="60" fill="#4edea3" r="4.5"></circle>
+                            <g transform="translate(560, 8)">
+                                <rect fill="#065f46" height="18" opacity="0.9" rx="4" width="80"></rect>
                                 <text class="font-code-sm text-[9px] font-semibold" fill="#6ffbbe" text-anchor="middle"
-                                    x="35" y="12">Récord CSAT</text>
+                                    x="40" y="12">Pico Consultas</text>
                             </g>
+
                             <!-- X Axis Timestamps -->
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="60"
-                                y="228">Ene</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="130"
-                                y="228">Feb</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="200"
-                                y="228">Mar</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="270"
-                                y="228">Abr</text>
-                            <text class="font-code-sm text-[11px] font-bold" fill="#4cd7f6" text-anchor="middle" x="340"
-                                y="228">May</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="410"
-                                y="228">Jun</text>
-                            <text class="font-code-sm text-[11px] font-bold" fill="#ffb4ab" text-anchor="middle" x="480"
-                                y="228">Jul</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="550"
-                                y="228">Ago</text>
-                            <text class="font-code-sm text-[11px] font-bold" fill="#4edea3" text-anchor="middle" x="620"
-                                y="228">Sep</text>
-                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="690"
-                                y="228">Oct</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="60" y="228">2021</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="180" y="228">2022-I</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#4cd7f6" text-anchor="middle" x="240" y="228">2022-II</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="360" y="228">2023-I</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#f472b6" text-anchor="middle" x="480" y="228">2023-II</text>
+                            <text class="font-code-sm text-[11px] font-bold" fill="#4edea3" text-anchor="middle" x="600" y="228">2024-I</text>
+                            <text class="font-code-sm text-[11px]" fill="#908fa0" text-anchor="middle" x="700" y="228">2024-II</text>
                         </svg>
                     </div>
                     <div
                         class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pt-space-xs bg-surface-container-low p-space-sm rounded-lg">
                         <div class="flex items-center gap-space-sm">
                             <span class="w-2 h-2 rounded-full bg-tertiary"></span>
-                            <span class="font-body-sm text-body-sm text-on-surface">Pico Positivo: <strong
-                                    class="text-tertiary">19,420 msgs en Septiembre</strong> tras release de
-                                onboarding asistido por IA.</span>
+                            <span class="font-body-sm text-body-sm text-on-surface">Picos Estacionales: Las consultas se cuadruplican durante periodos de inscripción y semanas de exámenes parciales.</span>
                         </div>
-                        <span class="font-code-sm text-code-sm text-outline">Resolución de Incidentes P0: Ø 42
-                            min</span>
+                        <span class="font-code-sm text-code-sm text-outline">47 Meses Históricos</span>
                     </div>
                 </div>
+
                 <!-- Visualization 4: Top Emojis Más Utilizados en Chats (4 cols on lg) -->
                 <div
                     class="lg:col-span-4 bg-surface-container rounded-xl p-space-md shadow-md flex flex-col justify-between">
                     <div class="flex items-center justify-between pb-space-xs">
                         <div class="flex items-center gap-space-xs">
                             <span class="material-symbols-outlined text-tertiary text-[20px]">add_reaction</span>
-                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Emojis en el Chat
-                            </h2>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface">Top Reacciones Telegram</h2>
                         </div>
-                        <span class="font-label-sm text-label-sm text-outline">8 más detectados</span>
+                        <span class="font-label-sm text-label-sm text-outline">{{ "{:,}".format(kpis.total_reacciones) }} totales</span>
                     </div>
-                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Clasificación sintáctica de
-                        emoticonos con asignación de tono contextual.</p>
-                    <!-- Vertical frequency columns grid -->
+                    <p class="font-body-sm text-body-sm text-outline mb-space-sm">Distribución de reacciones granulares recibidas en los mensajes.</p>
+                    
+                    <!-- Vertical frequency columns grid Dinámico -->
                     <div class="grid grid-cols-4 gap-space-xs h-56 items-end pb-space-sm pt-space-xs">
-                        <!-- Emoji 1: 🙏 (12,410) - Positivo -->
+                        {% for r in reacciones %}
                         <div class="flex flex-col items-center h-full justify-end group">
                             <span
-                                class="font-code-sm text-[10px] text-tertiary font-bold mb-1 opacity-90 group-hover:opacity-100">12.4k</span>
+                                class="font-code-sm text-[10px] text-tertiary font-bold mb-1 opacity-90 group-hover:opacity-100">{{ "{:,}".format(r.total) }}</span>
                             <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 90%;">
+                                style="height: {{ r.height_pct }}%;">
                                 <div class="w-full bg-tertiary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
                                     style="height: 100%;"></div>
                             </div>
-                            <span class="text-lg mt-1.5 select-none">🙏</span>
+                            <span class="text-xl mt-1.5 select-none">{{ r.emoji }}</span>
                             <span
-                                class="bg-tertiary-container/30 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
+                                class="bg-tertiary-container/30 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5 font-mono">#{{ loop.index }}</span>
                         </div>
-                        <!-- Emoji 2: 👍 (10,850) - Positivo -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-tertiary font-bold mb-1 opacity-90 group-hover:opacity-100">10.8k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 78%;">
-                                <div class="w-full bg-tertiary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">👍</span>
-                            <span
-                                class="bg-tertiary-container/30 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
-                        </div>
-                        <!-- Emoji 3: 😊 (8,920) - Positivo -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-secondary font-bold mb-1 opacity-90 group-hover:opacity-100">8.9k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 64%;">
-                                <div class="w-full bg-secondary rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">😊</span>
-                            <span
-                                class="bg-secondary/20 text-secondary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
-                        </div>
-                        <!-- Emoji 4: ⚠️ (5,310) - Alerta -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-error font-bold mb-1 opacity-90 group-hover:opacity-100">5.3k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 44%;">
-                                <div class="w-full bg-error rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">⚠️</span>
-                            <span
-                                class="bg-error-container/40 text-error font-code-sm text-[9px] px-1 rounded mt-0.5 font-semibold">Alerta</span>
-                        </div>
-                        <!-- Emoji 5: ⏳ (4,190) - Urgencia -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-outline font-bold mb-1 opacity-90 group-hover:opacity-100">4.1k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 35%;">
-                                <div class="w-full bg-outline rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">⏳</span>
-                            <span
-                                class="bg-surface-container-high text-outline font-code-sm text-[9px] px-1 rounded mt-0.5">Espera</span>
-                        </div>
-                        <!-- Emoji 6: 😡 (2,840) - Frustración -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-error font-bold mb-1 opacity-90 group-hover:opacity-100">2.8k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 25%;">
-                                <div class="w-full bg-error rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">😡</span>
-                            <span
-                                class="bg-error-container/40 text-error font-code-sm text-[9px] px-1 rounded mt-0.5 font-semibold">Riesgo</span>
-                        </div>
-                        <!-- Emoji 7: ❤️ (2,300) - Positivo -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-tertiary-fixed font-bold mb-1 opacity-90 group-hover:opacity-100">2.3k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 20%;">
-                                <div class="w-full bg-tertiary-fixed-dim rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">❤️</span>
-                            <span
-                                class="bg-tertiary-container/20 text-tertiary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
-                        </div>
-                        <!-- Emoji 8: 🎉 (1,950) - Positivo -->
-                        <div class="flex flex-col items-center h-full justify-end group">
-                            <span
-                                class="font-code-sm text-[10px] text-primary-fixed font-bold mb-1 opacity-90 group-hover:opacity-100">1.9k</span>
-                            <div class="w-full bg-surface-container-highest rounded-t-md flex items-end justify-center p-0.5"
-                                style="height: 16%;">
-                                <div class="w-full bg-primary-container rounded-t-sm transition-all duration-300 group-hover:brightness-110"
-                                    style="height: 100%;"></div>
-                            </div>
-                            <span class="text-lg mt-1.5 select-none">🎉</span>
-                            <span
-                                class="bg-primary/20 text-primary font-code-sm text-[9px] px-1 rounded mt-0.5">Pos</span>
-                        </div>
+                        {% else %}
+                        <div class="col-span-4 text-center py-space-lg text-outline font-body-sm">Cargando reacciones desde Neon...</div>
+                        {% endfor %}
                     </div>
+
                     <div
                         class="mt-space-sm pt-space-xs bg-surface-container-low px-space-sm py-2 rounded-lg flex items-center justify-between text-outline font-label-sm text-label-sm">
-                        <span>Correlación Emoticono / NPS: <strong class="text-on-surface">r =
-                                +0.89</strong></span>
+                        <span>Reacciones Sociales Nativas</span>
                         <span class="text-tertiary flex items-center gap-1">
                             <span class="material-symbols-outlined text-[14px]">bolt</span>
-                            Filtro Semántico OK
+                            Neon Live
                         </span>
                     </div>
                 </div>
