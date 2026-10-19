@@ -1,0 +1,948 @@
+{
+  "feliz": [
+    "joy",
+    "positive"
+  ],
+  "felicidad": [
+    "joy",
+    "positive"
+  ],
+  "alegre": [
+    "joy",
+    "positive"
+  ],
+  "contento": [
+    "joy",
+    "positive"
+  ],
+  "contenta": [
+    "joy",
+    "positive"
+  ],
+  "aprobé": [
+    "joy",
+    "positive"
+  ],
+  "aprobado": [
+    "joy",
+    "positive"
+  ],
+  "éxito": [
+    "joy",
+    "positive"
+  ],
+  "genial": [
+    "joy",
+    "positive"
+  ],
+  "excelente": [
+    "joy",
+    "positive"
+  ],
+  "celebrar": [
+    "joy",
+    "positive"
+  ],
+  "salvé": [
+    "joy",
+    "positive"
+  ],
+  "recomiendo": [
+    "trust",
+    "positive"
+  ],
+  "confianza": [
+    "trust",
+    "positive"
+  ],
+  "bueno": [
+    "trust",
+    "positive"
+  ],
+  "buena": [
+    "trust",
+    "positive"
+  ],
+  "justo": [
+    "trust",
+    "positive"
+  ],
+  "legal": [
+    "trust",
+    "positive"
+  ],
+  "apoyo": [
+    "trust",
+    "positive"
+  ],
+  "consejo": [
+    "trust",
+    "positive"
+  ],
+  "seguro": [
+    "trust",
+    "positive"
+  ],
+  "verdad": [
+    "trust",
+    "positive"
+  ],
+  "amigo": [
+    "trust",
+    "positive"
+  ],
+  "auxiliar": [
+    "trust",
+    "positive"
+  ],
+  "miedo": [
+    "fear",
+    "negative"
+  ],
+  "asustado": [
+    "fear",
+    "negative"
+  ],
+  "peligro": [
+    "fear",
+    "negative"
+  ],
+  "reprobar": [
+    "fear",
+    "negative"
+  ],
+  "matador": [
+    "fear",
+    "negative"
+  ],
+  "amenaza": [
+    "fear",
+    "negative"
+  ],
+  "grave": [
+    "fear",
+    "negative"
+  ],
+  "nervios": [
+    "fear",
+    "negative"
+  ],
+  "terror": [
+    "fear",
+    "negative"
+  ],
+  "triste": [
+    "sadness",
+    "negative"
+  ],
+  "tristeza": [
+    "sadness",
+    "negative"
+  ],
+  "pena": [
+    "sadness",
+    "negative"
+  ],
+  "llanto": [
+    "sadness",
+    "negative"
+  ],
+  "llorar": [
+    "sadness",
+    "negative"
+  ],
+  "jalado": [
+    "sadness",
+    "negative"
+  ],
+  "reprobé": [
+    "sadness",
+    "negative"
+  ],
+  "perdido": [
+    "sadness",
+    "negative"
+  ],
+  "decepcion": [
+    "sadness",
+    "negative"
+  ],
+  "depresion": [
+    "sadness",
+    "negative"
+  ],
+  "muerto": [
+    "sadness",
+    "negative"
+  ],
+  "rip": [
+    "sadness",
+    "negative"
+  ],
+  "ira": [
+    "anger",
+    "negative"
+  ],
+  "rabia": [
+    "anger",
+    "negative"
+  ],
+  "bronca": [
+    "anger",
+    "negative"
+  ],
+  "odio": [
+    "anger",
+    "negative"
+  ],
+  "molesto": [
+    "anger",
+    "negative"
+  ],
+  "enojado": [
+    "anger",
+    "negative"
+  ],
+  "injusto": [
+    "anger",
+    "negative"
+  ],
+  "abuso": [
+    "anger",
+    "negative"
+  ],
+  "estafa": [
+    "anger",
+    "negative"
+  ],
+  "prepotente": [
+    "anger",
+    "negative"
+  ],
+  "robo": [
+    "anger",
+    "negative"
+  ],
+  "reniego": [
+    "anger",
+    "negative"
+  ],
+  "asco": [
+    "disgust",
+    "negative"
+  ],
+  "desagradable": [
+    "disgust",
+    "negative"
+  ],
+  "chanta": [
+    "disgust",
+    "negative"
+  ],
+  "mentira": [
+    "disgust",
+    "negative"
+  ],
+  "falso": [
+    "disgust",
+    "negative"
+  ],
+  "horrible": [
+    "disgust",
+    "negative"
+  ],
+  "pesadilla": [
+    "disgust",
+    "negative"
+  ],
+  "pesado": [
+    "disgust",
+    "negative"
+  ],
+  "sucio": [
+    "disgust",
+    "negative"
+  ],
+  "espera": [
+    "anticipation"
+  ],
+  "esperando": [
+    "anticipation"
+  ],
+  "parcial": [
+    "anticipation"
+  ],
+  "examen": [
+    "anticipation"
+  ],
+  "futuro": [
+    "anticipation"
+  ],
+  "preparar": [
+    "anticipation"
+  ],
+  "estudiar": [
+    "anticipation"
+  ],
+  "horario": [
+    "anticipation"
+  ],
+  "inscripcion": [
+    "anticipation"
+  ],
+  "fecha": [
+    "anticipation"
+  ],
+  "mañana": [
+    "anticipation"
+  ],
+  "kardex": [
+    "anticipation"
+  ],
+  "sorpresa": [
+    "surprise"
+  ],
+  "inesperado": [
+    "surprise"
+  ],
+  "increible": [
+    "surprise"
+  ],
+  "asombro": [
+    "surprise"
+  ],
+  "milagro": [
+    "surprise",
+    "positive"
+  ],
+  "apareció": [
+    "surprise"
+  ],
+  "barco": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "salvar": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "salve": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "salvó": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "salvado": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "salvando": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "aprueba": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "aprobacion": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "facil": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "facilito": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "facilita": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "regalo": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "regalado": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "regala": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "regalaba": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "tranqui": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "tranquilo": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "tranquila": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "tranquis": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "accesible": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "suave": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "pichi": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "pan comido": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "llevadera": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "llevadero": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "chicha": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "regalito": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "relax": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "alivio": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "descanso": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "pasamos": [
+    "joy",
+    "trust",
+    "positive"
+  ],
+  "recomendado": [
+    "trust",
+    "positive"
+  ],
+  "recomendada": [
+    "trust",
+    "positive"
+  ],
+  "conviene": [
+    "trust",
+    "positive"
+  ],
+  "buen docente": [
+    "trust",
+    "positive"
+  ],
+  "buena docente": [
+    "trust",
+    "positive"
+  ],
+  "buen profe": [
+    "trust",
+    "positive"
+  ],
+  "buena onda": [
+    "trust",
+    "positive"
+  ],
+  "capo": [
+    "trust",
+    "positive"
+  ],
+  "capa": [
+    "trust",
+    "positive"
+  ],
+  "capisimo": [
+    "trust",
+    "positive"
+  ],
+  "crack": [
+    "trust",
+    "positive"
+  ],
+  "enseña bien": [
+    "trust",
+    "positive"
+  ],
+  "explica bien": [
+    "trust",
+    "positive"
+  ],
+  "justa": [
+    "trust",
+    "positive"
+  ],
+  "amable": [
+    "trust",
+    "positive"
+  ],
+  "comprensivo": [
+    "trust",
+    "positive"
+  ],
+  "comprensiva": [
+    "trust",
+    "positive"
+  ],
+  "puntual": [
+    "trust",
+    "positive"
+  ],
+  "vale la pena": [
+    "trust",
+    "positive"
+  ],
+  "buenisimo": [
+    "trust",
+    "positive"
+  ],
+  "buenisima": [
+    "trust",
+    "positive"
+  ],
+  "sabe mucho": [
+    "trust",
+    "positive"
+  ],
+  "dominio": [
+    "trust",
+    "positive"
+  ],
+  "genio": [
+    "trust",
+    "positive"
+  ],
+  "didactico": [
+    "trust",
+    "positive"
+  ],
+  "didactica": [
+    "trust",
+    "positive"
+  ],
+  "agradecido": [
+    "trust",
+    "positive"
+  ],
+  "fregado": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "fregada": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "friega": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "fregar": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "pesada": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "yuca": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "complicado": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "complicada": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "dificil": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "dificultad": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "matadora": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "filtro": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "tirarse": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "tiraron": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "tire": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "reprobado": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "reprobada": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "reprobo": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "jalada": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "aplazado": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "aplazada": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "aplaza": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "morir": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "masacre": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "desastre": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "perdicion": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "fui": [
+    "fear",
+    "sadness",
+    "negative"
+  ],
+  "no enseña": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "no explica": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "falton": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "faltona": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "no viene": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "no asiste": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "aburrido": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "aburrida": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "soberbio": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "soberbia": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "injusta": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "anula": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "queja": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "no te conviene": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "peor": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "pierde tiempo": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "renegon": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "renegona": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "grita": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "botado": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "botada": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "payaso": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "circo": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "desorden": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "no sube notas": [
+    "anger",
+    "disgust",
+    "negative"
+  ],
+  "segundo parcial": [
+    "anticipation",
+    "fear"
+  ],
+  "primer parcial": [
+    "anticipation",
+    "fear"
+  ],
+  "final": [
+    "anticipation",
+    "fear"
+  ],
+  "recuperatorio": [
+    "anticipation",
+    "fear"
+  ],
+  "mesa": [
+    "anticipation",
+    "fear"
+  ],
+  "2t": [
+    "anticipation",
+    "fear"
+  ],
+  "segundo turno": [
+    "anticipation",
+    "fear"
+  ],
+  "nota": [
+    "anticipation",
+    "fear"
+  ],
+  "notas": [
+    "anticipation",
+    "fear"
+  ],
+  "cuanto falta": [
+    "anticipation",
+    "fear"
+  ],
+  "cuando salen": [
+    "anticipation",
+    "fear"
+  ],
+  "actas": [
+    "anticipation",
+    "fear"
+  ],
+  "habilitado": [
+    "anticipation",
+    "fear"
+  ],
+  "habilitada": [
+    "anticipation",
+    "fear"
+  ],
+  "habilitacion": [
+    "anticipation",
+    "fear"
+  ],
+  "alcanza": [
+    "anticipation",
+    "fear"
+  ],
+  "reclamo": [
+    "anticipation",
+    "fear"
+  ],
+  "asustada": [
+    "anticipation",
+    "fear"
+  ],
+  "duda": [
+    "anticipation",
+    "fear"
+  ],
+  "preocupado": [
+    "anticipation",
+    "fear"
+  ],
+  "preocupada": [
+    "anticipation",
+    "fear"
+  ],
+  "rezar": [
+    "anticipation",
+    "fear"
+  ],
+  "fe": [
+    "anticipation",
+    "fear"
+  ],
+  "auxi": [
+    "anticipation",
+    "fear"
+  ],
+  "auxiliatura": [
+    "anticipation",
+    "fear"
+  ],
+  "ponderacion": [
+    "anticipation",
+    "fear"
+  ]
+}

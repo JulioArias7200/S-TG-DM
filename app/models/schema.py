@@ -88,6 +88,12 @@ class Mensaje(db.Model):
     codigo_materia = db.Column(db.String(50), db.ForeignKey("materias.codigo_materia", ondelete="SET NULL"), nullable=True)
     entidad_heredada_hilo = db.Column(db.Boolean, default=False)
     contenido_multimodal_unificado = db.Column(db.Text)
+    topico_lda_id = db.Column(db.Integer, default=0, index=True)
+    topico_lda_prob = db.Column(db.Float, default=0.0)
+    sentimiento_propio = db.Column(db.String(50), default="neutral", index=True)
+    sentimiento_propio_score = db.Column(db.Float, default=0.0)
+    emocion_propia = db.Column(db.String(50), default="neutral", index=True)
+    nrc_emocion_top = db.Column(db.String(50), default="none", index=True)
 
 class MencionDocente(db.Model):
     __tablename__ = "menciones_docentes"
@@ -104,6 +110,12 @@ class MencionDocente(db.Model):
     es_pregunta = db.Column(db.Boolean, default=False)
     total_reacciones = db.Column(db.Integer, default=0)
     contenido_multimodal_unificado = db.Column(db.Text)
+    topico_lda_id = db.Column(db.Integer, default=0, index=True)
+    topico_lda_prob = db.Column(db.Float, default=0.0)
+    sentimiento_propio = db.Column(db.String(50), default="neutral", index=True)
+    sentimiento_propio_score = db.Column(db.Float, default=0.0)
+    emocion_propia = db.Column(db.String(50), default="neutral", index=True)
+    nrc_emocion_top = db.Column(db.String(50), default="none", index=True)
 
 class ReaccionGranular(db.Model):
     __tablename__ = "reacciones_granular"
@@ -189,4 +201,43 @@ class OcrCache(db.Model):
     longitud_caracteres = db.Column(db.Integer, default=0)
     tiene_texto = db.Column(db.Boolean, default=False)
     fecha_registro = db.Column(db.DateTime, default=datetime.utcnow)
+
+class LdaTopico(db.Model):
+    __tablename__ = "lda_topicos"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    topico_id = db.Column(db.Integer, nullable=False, index=True)
+    nombre_etiqueta = db.Column(db.Text, nullable=False)
+    termino = db.Column(db.Text, nullable=False, index=True)
+    beta_prob = db.Column(db.Float, nullable=False)
+    ranking_pos = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            "topico_id": self.topico_id,
+            "nombre_etiqueta": self.nombre_etiqueta,
+            "termino": self.termino,
+            "beta_prob": self.beta_prob,
+            "ranking_pos": self.ranking_pos
+        }
+
+class TfidfEntidad(db.Model):
+    __tablename__ = "tfidf_entidades"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    entidad_tipo = db.Column(db.String(50), nullable=False, index=True)
+    entidad_id = db.Column(db.Text, nullable=False, index=True)
+    termino = db.Column(db.Text, nullable=False, index=True)
+    score_tfidf = db.Column(db.Float, nullable=False)
+    ranking_pos = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            "entidad_tipo": self.entidad_tipo,
+            "entidad_id": self.entidad_id,
+            "termino": self.termino,
+            "score_tfidf": self.score_tfidf,
+            "ranking_pos": self.ranking_pos
+        }
+
 

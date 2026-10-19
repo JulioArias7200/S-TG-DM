@@ -11,7 +11,11 @@ from database.queries import (
     get_top_reacciones_telegram,
     get_modalidad_chat_distribution,
     get_tendencia_temporal_resumen,
-    get_neon_health_telemetry
+    get_neon_health_telemetry,
+    get_lda_topics_summary,
+    get_perfil_emocional_docentes,
+    get_nlp_kpis_summary,
+    get_tfidf_keywords
 )
 
 @web_bp.route("/")
@@ -19,7 +23,7 @@ from database.queries import (
 def dashboard_view():
     """
     Renderiza el monitor ejecutivo de analítica y telemetría conectado en vivo
-    a Neon Serverless PostgreSQL (TGBase).
+    a Neon Serverless PostgreSQL (TGBase) con procesamiento de PLN avanzado.
     """
     try:
         kpis = get_dashboard_kpis()
@@ -29,20 +33,17 @@ def dashboard_view():
         modalidad = get_modalidad_chat_distribution()
         tendencia = get_tendencia_temporal_resumen()
         neon_status = get_neon_health_telemetry()
+        lda_topics = get_lda_topics_summary()
+        perfil_emocional = get_perfil_emocional_docentes(limit=8)
+        nlp_kpis = get_nlp_kpis_summary()
+        top_tfidf_docentes = get_tfidf_keywords(entidad_tipo="DOCENTE", limit=12)
+        top_tfidf_ciclos = get_tfidf_keywords(entidad_tipo="CICLO", limit=12)
     except Exception as e:
         # Fallback defensivo
         kpis = {
-            "total_mensajes": 23462,
-            "usuarios_unicos": 2054,
-            "promedio_msgs_usuario": 11.4,
-            "total_docentes": 85,
-            "total_materias": 158,
-            "total_menciones": 3734,
-            "total_paralelos": 267,
-            "total_multimodal": 4919,
-            "total_ocr": 1782,
-            "total_gifs": 24,
-            "total_reacciones": 2575,
+            "total_mensajes": 23462, "usuarios_unicos": 2054, "promedio_msgs_usuario": 11.4,
+            "total_docentes": 85, "total_materias": 158, "total_menciones": 3734, "total_paralelos": 267,
+            "total_multimodal": 4919, "total_ocr": 1782, "total_gifs": 24, "total_reacciones": 2575,
             "total_modismos": 538
         }
         ranking_docentes = []
@@ -56,15 +57,15 @@ def dashboard_view():
         }
         tendencia = []
         neon_status = {
-            "status": f"Reconectando ({e})",
-            "engine": "Neon Serverless PostgreSQL",
-            "version": "PostgreSQL 18.6",
-            "database": "TGBase",
-            "region": "sa-east-1",
-            "size": "N/A",
-            "tables_count": 12,
-            "views_count": 3
+            "status": f"Reconectando ({e})", "engine": "Neon Serverless PostgreSQL",
+            "version": "PostgreSQL 18.6", "database": "TGBase", "region": "sa-east-1",
+            "size": "N/A", "tables_count": 14, "views_count": 4
         }
+        lda_topics = []
+        perfil_emocional = []
+        nlp_kpis = {}
+        top_tfidf_docentes = []
+        top_tfidf_ciclos = []
 
     return render_template(
         "dashboard/index.html",
@@ -74,5 +75,11 @@ def dashboard_view():
         reacciones=reacciones,
         modalidad=modalidad,
         tendencia=tendencia,
-        neon_status=neon_status
+        neon_status=neon_status,
+        lda_topics=lda_topics,
+        perfil_emocional=perfil_emocional,
+        nlp_kpis=nlp_kpis,
+        top_tfidf_docentes=top_tfidf_docentes,
+        top_tfidf_ciclos=top_tfidf_ciclos
     )
+

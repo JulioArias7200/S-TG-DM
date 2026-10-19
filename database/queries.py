@@ -196,6 +196,118 @@ def get_neon_health_telemetry():
             "database": r["db_name"],
             "region": "sa-east-1 (AWS São Paulo)",
             "size": r["db_size"],
-            "tables_count": 12,
-            "views_count": 3
+            "tables_count": 14,
+            "views_count": 4
         }
+
+def get_tfidf_keywords(entidad_tipo="DOCENTE", entidad_id=None, limit=15):
+    """Retorna los términos más distintivos calculados con TF-IDF por Docente, Materia o Ciclo."""
+    if entidad_id:
+        query = text("""
+            SELECT entidad_tipo, entidad_id, termino, score_tfidf, ranking_pos
+            FROM tfidf_entidades
+            WHERE entidad_tipo = :tipo AND (LOWER(entidad_id) = LOWER(:id) OR entidad_id ILIKE :like_id)
+            ORDER BY ranking_pos ASC
+            LIMIT :limit
+        """)
+        params = {"tipo": entidad_tipo, "id": entidad_id, "like_id": f"%{entidad_id}%", "limit": limit}
+    else:
+        query = text("""
+            SELECT entidad_tipo, entidad_id, termino, score_tfidf, ranking_pos
+            FROM tfidf_entidades
+            WHERE entidad_tipo = :tipo
+            ORDER BY score_tfidf DESC
+            LIMIT :limit
+        """)
+        params = {"tipo": entidad_tipo, "limit": limit}
+
+    with engine.connect() as conn:
+        return [dict(r) for r in conn.execute(query, params).mappings().all()]
+
+def get_lda_topics_summary():
+    """Retorna los tópicos descubiertos por Latent Dirichlet Allocation (LDA) con su vocabulario Beta y conteo Gamma."""
+    query_topics = text("""
+        SELECT 
+            t.topico_id,
+            t.nombre_etiqueta,
+            COUNT(DISTINCT m.mensaje_id) AS total_mensajes_asignados,
+            ROUND((COUNT(DISTINCT m.mensaje_id)::numeric / NULLIF((SELECT COUNT(*) FROM mensajes), 0)) * 100, 1) AS porcentaje_corpus
+        FROM lda_topicos t
+        LEFT JOIN mensajes m ON t.topico_id = m.topico_lda_id
+        GROUP BY t.topico_id, t.nombre_etiqueta
+        ORDER BY t.topico_id ASC
+    """)
+    query_vocab = text("""
+        SELECT topico_id, termino, beta_prob, ranking_pos
+        FROM lda_topicos
+        WHERE ranking_pos <= 10
+        ORDER BY topico_id ASC, ranking_pos ASC
+    """)
+    with engine.connect() as conn:
+        topics = [dict(r) for r in conn.execute(query_topics).mappings().all()]
+        vocab = [dict(r) for r in conn.execute(query_vocab).mappings().all()]
+        
+        # Agrupar vocabulario por tópico
+        for t in topics:
+            t_id = t["topico_id"]
+            t["vocabulario_top"] = [v for v in vocab if v["topico_id"] == t_id]
+        return topics
+
+def get_perfil_emocional_docentes(limit=50):
+    """Retorna el desglose de emociones UMSA y polaridad por docente desde la vista SQL analítica."""
+    query = text("""
+        SELECT 
+            docente_id,
+            docente,
+            departamento,
+            total_menciones,
+            score_sentimiento_promedio,
+            menciones_positivas,
+            menciones_negativas,
+            menciones_neutrales,
+            emo_alivio,
+            emo_frustracion,
+            emo_incertidumbre,
+            emo_conformidad,
+            emo_descontento
+        FROM vista_perfil_emocional_docentes
+        ORDER BY total_menciones DESC, docente ASC
+        LIMIT :limit
+    """)
+    with engine.connect() as conn:
+        return [dict(r) for r in conn.execute(query, {"limit": limit}).mappings().all()]
+
+def get_perfil_emocional_docente(docente_id):
+    """Retorna el perfil emocional específico de un docente o por nombre."""
+    query = text("""
+        SELECT *
+        FROM vista_perfil_emocional_docentes
+        WHERE docente_id = :id OR docente ILIKE :like_nom
+        LIMIT 1
+    """)
+    with engine.connect() as conn:
+        row = conn.execute(query, {"id": docente_id, "like_nom": f"%{docente_id}%"}).mappings().first()
+        return dict(row) if row else None
+
+def get_nlp_kpis_summary():
+    """Consolida métricas ejecutivas de NLP (Tópicos, Emociones Propias y NRC)."""
+    query = text("""
+        SELECT 
+            (SELECT COUNT(*) FROM lda_topicos) AS total_terminos_lda,
+            (SELECT COUNT(*) FROM tfidf_entidades) AS total_descriptores_tfidf,
+            (SELECT COUNT(*) FROM mensajes WHERE sentimiento_propio = 'positivo') AS total_positivos,
+            (SELECT COUNT(*) FROM mensajes WHERE sentimiento_propio = 'negativo') AS total_negativos,
+            (SELECT COUNT(*) FROM mensajes WHERE sentimiento_propio = 'neutral') AS total_neutrales,
+            (SELECT COUNT(*) FROM mensajes WHERE emocion_propia = 'incertidumbre_ansiedad') AS emo_ansiedad,
+            (SELECT COUNT(*) FROM mensajes WHERE emocion_propia = 'conformidad_recomendacion') AS emo_conformidad,
+            (SELECT COUNT(*) FROM mensajes WHERE emocion_propia = 'alivio_aprobacion') AS emo_alivio,
+            (SELECT COUNT(*) FROM mensajes WHERE emocion_propia = 'frustracion_dificultad') AS emo_frustracion,
+            (SELECT COUNT(*) FROM mensajes WHERE emocion_propia = 'descontento_critica') AS emo_descontento,
+            (SELECT COUNT(*) FROM mensajes WHERE nrc_emocion_top = 'trust') AS nrc_trust,
+            (SELECT COUNT(*) FROM mensajes WHERE nrc_emocion_top = 'fear') AS nrc_fear,
+            (SELECT COUNT(*) FROM mensajes WHERE nrc_emocion_top = 'anticipation') AS nrc_anticipation
+    """)
+    with engine.connect() as conn:
+        r = conn.execute(query).mappings().one()
+        return dict(r)
+

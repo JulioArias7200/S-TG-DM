@@ -1,0 +1,70 @@
+﻿entidad_tipo,entidad_id,termino,score_tfidf,ranking_pos
+CICLO,Ciclo Básico,imagen,0.3986,1
+CICLO,Ciclo Básico,adjunta,0.3624,2
+CICLO,Ciclo Básico,imagen adjunta,0.362,3
+CICLO,Ciclo Básico,reacciones,0.347,4
+CICLO,Ciclo Básico,inf,0.1928,5
+CICLO,Ciclo Básico,materias,0.1525,6
+CICLO,Ciclo Básico,adjunta imagen,0.1115,7
+CICLO,Ciclo Básico,solo,0.1061,8
+CICLO,Ciclo Básico,temporada,0.0974,9
+CICLO,Ciclo Básico,carrera,0.0971,10
+CICLO,Ciclo Básico,puede,0.0924,11
+CICLO,Ciclo Básico,horario,0.0851,12
+CICLO,Ciclo Básico,saben,0.0843,13
+CICLO,Ciclo Básico,hoy,0.0824,14
+CICLO,Ciclo Básico,semestre,0.0785,15
+CICLO,Ciclo Básico,informática,0.0767,16
+CICLO,Ciclo Básico,curso,0.0763,17
+CICLO,Ciclo Básico,kardex,0.0731,18
+CICLO,Ciclo Básico,hora,0.0717,19
+CICLO,Ciclo Básico,whatsapp,0.0715,20
+CICLO,Ciclo Básico,retiro,0.0714,21
+CICLO,Ciclo Básico,día,0.0706,22
+CICLO,Ciclo Básico,recomiendan,0.0705,23
+CICLO,Ciclo Básico,inscripción,0.0703,24
+CICLO,Ciclo Básico,horarios,0.0696,25
+CICLO,Ciclo Intermedio,tra mauro,0.298,1
+CICLO,Ciclo Intermedio,pasando metodologia,0.298,2
+CICLO,Ciclo Intermedio,investigacion tra,0.298,3
+CICLO,Ciclo Intermedio,decir porfavor,0.298,4
+CICLO,Ciclo Intermedio,costantino podria,0.298,5
+CICLO,Ciclo Intermedio,metodologia investigacion,0.2266,6
+CICLO,Ciclo Intermedio,metodologia,0.2266,7
+CICLO,Ciclo Intermedio,investigacion,0.2266,8
+CICLO,Ciclo Intermedio,mauro,0.2266,9
+CICLO,Ciclo Intermedio,mauro costantino,0.2266,10
+CICLO,Ciclo Intermedio,costantino,0.2266,11
+CICLO,Ciclo Intermedio,podria,0.176,12
+CICLO,Ciclo Intermedio,pasando,0.176,13
+CICLO,Ciclo Intermedio,podria decir,0.176,14
+CICLO,Ciclo Intermedio,tra,0.176,15
+CICLO,Ciclo Intermedio,porfavor,0.176,16
+CICLO,Ciclo Intermedio,estan pasando,0.176,17
+CICLO,Ciclo Intermedio,estan,0.176,18
+CICLO,Ciclo Intermedio,decir,0.176,19
+CICLO,Ciclo Superior,inf,0.5819,1
+CICLO,Ciclo Superior,sis,0.2213,2
+CICLO,Ciclo Superior,sistemas,0.1896,3
+CICLO,Ciclo Superior,seg,0.1566,4
+CICLO,Ciclo Superior,temporada,0.1509,5
+CICLO,Ciclo Superior,semestre,0.1422,6
+CICLO,Ciclo Superior,únete,0.1408,7
+CICLO,Ciclo Superior,plan,0.1307,8
+CICLO,Ciclo Superior,whatsapp,0.1264,9
+CICLO,Ciclo Superior,datos,0.1178,10
+CICLO,Ciclo Superior,tic,0.1135,11
+CICLO,Ciclo Superior,nuevo,0.1078,12
+CICLO,Ciclo Superior,enlace,0.1063,13
+CICLO,Ciclo Superior,antiguo,0.1063,14
+CICLO,Ciclo Superior,materias,0.1049,15
+CICLO,Ciclo Superior,diseño,0.0991,16
+CICLO,Ciclo Superior,seguridad,0.0977,17
+CICLO,Ciclo Superior,dat,0.0963,18
+CICLO,Ciclo Superior,diseño sistemas,0.0934,19
+CICLO,Ciclo Superior,oportunidad,0.0934,20
+CICLO,Ciclo Superior,com,0.0919,21
+CICLO,Ciclo Superior,compañeros,0.0805,22
+CICLO,Ciclo Superior,ii,0.0761,23
+CICLO,Ciclo Superior,imagen,0.0761,24
+CICLO,Ciclo Superior,análisis diseño,0.0747,25
